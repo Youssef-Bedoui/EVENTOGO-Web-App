@@ -20,7 +20,3 @@
     []- Ali
 # Link to github and link to trello ! :fusée:
     []- https://github.com/GREEN-FIELD-SKYFA-22/SKYFA
-
-
-
-    test

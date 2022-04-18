@@ -20,3 +20,31 @@
     []- Ali
 # Link to github and link to trello ! :fusée:
     []- https://github.com/GREEN-FIELD-SKYFA-22/SKYFA
+
+
+
+# Front
+    *pages
+        & home
+        & profile
+        & edit
+        & add
+        & user
+            " login
+            " signin
+            " logout
+# Route  
+# Back   
+    * Express 
+        & showAll
+        & showOne
+        & createOne
+        & updateOne
+        & deleteOne
+        & Login
+        & signin
+
+        test git hub
+        
+
+    

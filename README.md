@@ -1,3 +1,29 @@
+# myroute
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run start
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+
 # SKYFA
 
 # What is the name of your team / organisation ?
@@ -9,6 +35,7 @@
 # What are the technology that you are going to use in this project ? (except "vuejs")
     []-ExpressJS - Vue.js - mongoDb (cluster)
 # What are the main feature of your project ?
+    # What are the main feature of your project ?
     []- Choosing events
     []- CRUD oprerations
     []- Login system
@@ -22,29 +49,10 @@
     []- https://github.com/GREEN-FIELD-SKYFA-22/SKYFA
 
 
-# Front
-    *pages
-        & home
-        & profile
-        & edit
-        & add
-        & user
-            " login
-            " signin
-            " logout
-# Route  
-# Back   
-    * Express 
-        & showAll
-        & showOne
-        & createOne
-        & updateOne
-        & deleteOne
-        & Login
-        & signin
 
-        
-        
 
-    
-
+    [1]--- Slim      =>  Home (display All Events )            => Landing layout
+    [2]--- Youssef   =>  Add / update / delete                 => Event Admin
+    [1]--- Khayre    =>  Sign in / sign up / update            => authentication
+    [1]--- Fradj     =>  Delete / displayAll / chart           => User  Admin
+    [1]--- Ali       =>  profile (Interested) / About          => User interaction

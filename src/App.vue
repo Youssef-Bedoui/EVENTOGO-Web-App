@@ -1,13 +1,17 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/profile">Profile</router-link> |
-      <router-link to="/add">Add Event</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/sign up">Sign Up</router-link> |
-      <router-link to="/sign in">Sign in</router-link> |
-      <router-link to="/">Logout</router-link>
+      <div class="navleft">
+        <router-link to="/">Home</router-link> |
+        <router-link to="/about">About</router-link> |
+        <router-link to="/add">Add Event</router-link> |
+      </div>
+      <div class="navright">
+        <router-link to="/sign up">Sign Up</router-link> |
+        <router-link to="/sign in">Sign in</router-link> |
+        <router-link to="/profile">Profile</router-link> |
+        <router-link to="/">Logout</router-link>
+      </div>
     </nav>
     <router-view />
   </div>
@@ -23,7 +27,14 @@
 }
 
 nav {
+  background-color: #f5f5f5;
   padding: 30px;
+  display: flex;
+  flex-direction:row;
+}
+.navright{
+  position: relative;
+  left:65%
 }
 
 nav a {

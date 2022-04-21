@@ -2,9 +2,18 @@
   <div>
     <div>
       <li v-for="(elem,i) in this.events " :key="i">
-           <h1>{{ elem }}</h1>
+           <h1>title: {{ elem.title }}</h1>
+           <h1>date: {{ elem.date }}</h1>
+           <h1>description: {{ elem.description }}</h1>
+           <img :src= elem.image />
+           <h1>{{ elem.type}}</h1>
+
       </li>
-      <button v-on:click="postFavorite">slim</button>
+      <button v-on:click="postFavorite">favorite</button>
+      <button >edit</button>
+      <button >delete</button>
+      
+
     </div>
     <h1>Home Page</h1>
   </div>
@@ -22,7 +31,7 @@ export default {
     .then(result => {
       console.log (this.events)
       console.log (result.data)
-      // this.events=result.data
+      this.events=result.data
       console.log (this.events)
 })},
 methods: {

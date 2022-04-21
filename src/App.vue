@@ -3,11 +3,16 @@
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/profile">Profile</router-link> |
-      <router-link to="/add">Add Event</router-link> |
       <router-link to="/about">About</router-link> |
+
+     
+      <router-link to="/">Logout</router-link> |
+      <router-link to="/add">Add event</router-link> |
+      <router-link to="/modif">Modif Event</router-link> 
       <router-link to="/signup">Sign Up</router-link> |
       <router-link to="/signin">Sign in</router-link> |
       <router-link to="/">Logout</router-link>
+
     </nav>
     <router-view />
   </div>

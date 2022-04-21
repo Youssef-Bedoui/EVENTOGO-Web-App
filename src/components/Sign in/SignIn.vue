@@ -13,7 +13,7 @@ export default {
   methods:{
     post:()=>{
       console.log('khal');
-      axios.post('http://localhost:3000/api/user/signin',{"password":"123","email":"'admin@mail.com'"})
+      axios.post('http://localhost:3000/api/user/signin',{password:"123",email:"'admin@mail.com'"})
       .then(result=>{
         console.log(result.data)
       })

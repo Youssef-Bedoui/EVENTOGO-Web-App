@@ -34,7 +34,7 @@
       </div>
       <div id="element">
         <label>Event Image :</label>
-        <input type="file" @change="onUpload" />
+        <input type="text" @change="onUpload" />
       </div>
       <div  type="button" @click="handleSubmit()">
         <router-link id="addBtn" to="/home">Publish Your Event</router-link>

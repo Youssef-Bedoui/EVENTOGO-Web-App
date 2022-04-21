@@ -4,11 +4,15 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/profile">Profile</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/sign up">Sign Up</router-link> |
-      <router-link to="/sign in">Sign in</router-link> |
+
+     
       <router-link to="/">Logout</router-link> |
       <router-link to="/add">Add event</router-link> |
       <router-link to="/modif">Modif Event</router-link> 
+      <router-link to="/signup">Sign Up</router-link> |
+      <router-link to="/signin">Sign in</router-link> |
+      <router-link to="/">Logout</router-link>
+
     </nav>
     <router-view />
   </div>
@@ -19,7 +23,7 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  
   color: #2c3e50;
 }
 

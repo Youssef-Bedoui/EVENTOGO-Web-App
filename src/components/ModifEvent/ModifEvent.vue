@@ -40,12 +40,15 @@
       </div>
       <div id="element">
         <label>Event Image :</label>
-        <input type="text" @change="onUpload" />
+        <input type="text" @change="onUpload" 
+        v-bind:defaultValue="this.image
+        
+        "/>
       </div>
       <div type="button" id="modifBtn" @click="handleSubmit()">
-        <!-- <router-link id="modifBtn" to="/home"> -->
+        <router-link to="/">
         Submit Changes
-        <!-- </router-link> -->
+        </router-link>
       </div>
     </div>
   </div>
@@ -56,13 +59,27 @@ import axios from "axios";
 
 export default {
   name: "ModifView",
+  mounted: function () {
+    this.id=localStorage.getItem('id')
+    console.log(this.id);
+    axios.get(`http://localhost:3000/api/event/selectOne/${this.id}`)
+    .then((result) => {
+      console.log(result);
+      this.title = result.data[0].title
+      this.description = result.data[0].description
+      this.type = result.data[0].type
+      this.image= result.data[0].image
+      this.date= result.data[0].date
+    });
+  },
   data() {
     return {
-      title: "khalil",
-      description: "youssef",
-      type: 'null',
-      image: 'null',
-      date: 'null',
+      id:'',
+      title: "",
+      description: "",
+      type: '',
+      image: '',
+      date: '',
     };
   },
   methods: {
@@ -87,7 +104,7 @@ export default {
     },
     handleSubmit() {
       axios
-        .put(`http://localhost:3000/api/event/modif/1`, {
+        .put(`http://localhost:3000/api/event/modif/${this.id}`, {
           title: this.title,
           description: this.description,
           date: this.date,

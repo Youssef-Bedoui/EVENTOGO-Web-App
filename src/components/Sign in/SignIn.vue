@@ -3,21 +3,35 @@ import axios from "axios"
 export default {
   data() {
     return {
-      user:{},
-      
+    email:"",
+    password:""
     };
   },
   mounted(){
 
   },
   methods:{
-    post:()=>{
-      console.log('khal');
-      axios.post('http://localhost:3000/api/user/signin',{password:"123",email:"'admin@mail.com'"})
+     emailInput(event) {
+      this.email= event.target.value; 
+      console.log(this.email);
+    },
+     passwordInput(event) {
+      this.password= event.target.value; 
+      
+      console.log(this.password)
+    },
+    post(){
+      console.log(this.email);
+      var person={}
+        person["password"]=this.password
+        person["email"]=this.email
+        
+      axios.post('http://localhost:3000/api/user/signin',person)
       .then(result=>{
         console.log(result.data)
+        if(result.data[0]==='succesfully connected'){location.href = '/'}
       })
-
+console.log(person);
     }
   }
 };
@@ -26,22 +40,24 @@ export default {
   <div class="signin">
     <div class="form">
       <h3>Sign In</h3>
+      
       <div class="form-group">
         <div class="h4">
           <h4>Email </h4>
           <h4>Password</h4>
         </div>
         <div class="input">
-          <input type="email"  />
-          <input type="password"  />
+          <input type="email" name="emailInput" placeholder="email" @change="emailInput($event)" required>
+          <input type="password" name="passwordInput" placeholder="password" @change="passwordInput($event)" required>
         </div>
       </div>
 
-      <div class="btn" >
-        <button class="btn" @click="post()" >
+      
+        <button class="btn" @click="post" >
           Sign In
         </button>
-      </div>
+      
+    
     </div>
   </div>
 </template>

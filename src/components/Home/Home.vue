@@ -24,10 +24,8 @@ export default {
   props: {},
   mounted: function () {
     axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
-      console.log(this.events);
-      console.log(result.data);
       this.events = result.data;
-      console.log(this.events);
+      // console.log(this.events);
     });
   },
   methods: {

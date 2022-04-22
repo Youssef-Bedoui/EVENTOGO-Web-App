@@ -4,7 +4,7 @@ export default {
   data() {
     return {
       name:"",
-      email:"''",
+      email:"",
       password:""
       
     };
@@ -35,7 +35,7 @@ export default {
       )
       .then(result=>{
         console.log(result.data);
-if(result.data[0]==='yes'){location.href = '/'}
+if(result.data[0]==='yes'){location.href = 'signin'}
 else {alert("user already exist")}
       })
     }
@@ -46,7 +46,6 @@ else {alert("user already exist")}
     <div class="vue-tempalte">
         <div class="form">
             <h3>Sign Up</h3>
-            <form @submit.prevent="register" method="post">
             <div class="form-group">
                 <h4>Full Name</h4>
                 <input type="text" name="nameInput" @change="nameInput($event)"/>
@@ -63,7 +62,6 @@ else {alert("user already exist")}
                 
           Sign Up
         </button>
-        </form>
             <p class="text-right">
                 Already registered 
                 <router-link :to="{name: 'signin'}">sign in?</router-link>

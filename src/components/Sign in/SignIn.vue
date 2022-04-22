@@ -25,13 +25,13 @@ export default {
       var person={}
         person["password"]=this.password
         person["email"]=this.email
-    
+        
       axios.post('http://localhost:3000/api/user/signin',person)
       .then(result=>{
         console.log(result.data)
         if(result.data[0]==='succesfully connected'){location.href = '/'}
       })
-
+console.log(person);
     }
   }
 };
@@ -40,7 +40,7 @@ export default {
   <div class="signin">
     <div class="form">
       <h3>Sign In</h3>
-      <form method="post">
+      
       <div class="form-group">
         <div class="h4">
           <h4>Email </h4>
@@ -57,7 +57,7 @@ export default {
           Sign In
         </button>
       
-      </form>
+    
     </div>
   </div>
 </template>

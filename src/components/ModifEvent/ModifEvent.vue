@@ -120,7 +120,7 @@ export default {
   props: {
     //props come from home onclock on modif btn
     event: {
-      id:1
+      id: localStorage.getItem('id')
     },
   },
 };

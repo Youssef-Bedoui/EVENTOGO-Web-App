@@ -6,10 +6,9 @@
       <h1>description: {{ elem.description }}</h1>
       <img :src="elem.image" />
       <h1>{{ elem.type }}</h1>
+
       <button v-on:click="postFavorite">favorite</button>
-      
-        <button :value="elem.id" @click="edit($event)" >edit</button>
-      
+      <button :value="elem.id" @click="edit($event)" >edit</button>
       <button>delete</button>
     </div>
 
@@ -38,8 +37,9 @@ export default {
       console.log("slim");
     },
     edit(event){
-      console.log(event.target.value);
-      localStorage.setItem("id",event.target.value)
+    //  console.log(event.target.value);
+      console.log("our event", event);
+      localStorage.setItem("id", event.target.value)
       location.href = "/modif"
     }
   },

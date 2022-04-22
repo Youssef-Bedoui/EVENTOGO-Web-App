@@ -59,9 +59,9 @@ import axios from "axios";
 
 export default {
   name: "ModifView",
-  mounted: function () {
+    mounted: function () {
     this.id=localStorage.getItem('id')
-    console.log(this.id);
+    console.log("idofEvent",this.id);
     axios.get(`http://localhost:3000/api/event/selectOne/${this.id}`)
     .then((result) => {
       console.log(result);

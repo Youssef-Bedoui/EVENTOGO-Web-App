@@ -1,15 +1,18 @@
 <template>
   <div>
-    <ModifView />
+    <ModifEvent />
   </div>
 </template>
 
 <script>
-import ModifView from "../components/ModifEvent/ModifEvent.vue";
+import ModifEvent from "../components/ModifEvent/ModifEvent.vue";
 export default {
   name: "ModifView",
   components: {
-    ModifView,
+    ModifEvent,
+  },
+  props: {
+
   },
 };
 </script>

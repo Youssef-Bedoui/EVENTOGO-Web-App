@@ -94,9 +94,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
         test git hub
         
 
+
     [1]--- Slim      =>  Home (display All Events )            => Landing layout
     [2]--- Youssef   =>  Add / update / delete                 => Event Admin
     [1]--- Khayre    =>  Sign in / sign up / update            => authentication
     [1]--- Fradj     =>  Delete / displayAll / chart           => User  Admin
     [1]--- Ali       =>  profile (Interested) / About          => User interaction
 
+
+# checking

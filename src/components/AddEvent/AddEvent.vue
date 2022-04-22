@@ -37,7 +37,7 @@
         <input type="text" @change="onUpload" />
       </div>
       <div  type="button" @click="handleSubmit()">
-        <router-link id="addBtn" to="/home">Publish Your Event</router-link>
+        <router-link id="addBtn" to="/">Publish Your Event</router-link>
       </div>
     </div>
   </div>

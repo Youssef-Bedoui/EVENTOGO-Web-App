@@ -3,7 +3,9 @@ import axios from "axios"
 export default {
   data() {
     return {
-      user:{},
+      name:"",
+      email:"''",
+      password:""
       
     };
   },
@@ -11,41 +13,62 @@ export default {
 
   },
   methods:{
-    post:()=>{
-      console.log('khal');
-      axios.post('http://localhost:3000/api/user/signup')
+     nameInput(event) {
+      this.name= event.target.value;
+    },
+     emailInput(event) {
+      this.email= event.target.value;
+    },
+     passwordInput(event) {
+      this.password= event.target.value;
+      console.log(this.password);
+    },
+    post(){
+      var person={}
+        person["password"]=this.password
+        person["email"]=this.email
+        person["name"]=this.name
+        person["role"]="user"
+      
+      axios.post('http://localhost:3000/api/user/signup',
+      person
+      )
       .then(result=>{
-        console.log(result.data)
+        console.log(result.data);
+if(result.data[0]==='yes'){location.href = '/'}
+else {alert("user already exist")}
       })
-
     }
   }
 };
 </script>
 <template>
     <div class="vue-tempalte">
-        <form>
+        <div class="form">
             <h3>Sign Up</h3>
+            <form @submit.prevent="register" method="post">
             <div class="form-group">
                 <h4>Full Name</h4>
-                <input type="text" class="form-control form-control-lg"/>
+                <input type="text" name="nameInput" @change="nameInput($event)"/>
             </div>
             <div class="form-group">
                 <h4>Email address</h4>
-                <input type="email" class="form-control form-control-lg" />
+                <input type="email" name="emailInput" @change="emailInput($event)" required>
             </div>
             <div class="form-group">
                 <h4>Password</h4>
-                <input type="password" class="form-control form-control-lg" />
+                <input type="password" name="passwordInput" @change="passwordInput($event)" required>
             </div>
-            <button class="btn" @click="post" >
+            <button class="btn" @click="post()" >
+                
           Sign Up
         </button>
+        </form>
             <p class="text-right">
                 Already registered 
                 <router-link :to="{name: 'signin'}">sign in?</router-link>
             </p>
-        </form>
+        </div>
     </div>
 </template>
 <style>

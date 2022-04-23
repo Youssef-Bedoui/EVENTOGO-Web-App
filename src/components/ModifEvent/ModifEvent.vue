@@ -40,15 +40,14 @@
       </div>
       <div id="element">
         <label>Event Image :</label>
-        <input type="text" @change="onUpload" 
-        v-bind:defaultValue="this.image
-        
-        "/>
+        <input
+          type="text"
+          @change="onUpload"
+          v-bind:defaultValue="this.image"
+        />
       </div>
-      <div type="button" id="modifBtn" @click="handleSubmit()">
-        <router-link to="/">
-        Submit Changes
-        </router-link>
+      <div>
+        <button id="modifBtn" @click="handleSubmit()">Submit Changes</button>
       </div>
     </div>
   </div>
@@ -59,27 +58,28 @@ import axios from "axios";
 
 export default {
   name: "ModifView",
-    mounted: function () {
-    this.id=localStorage.getItem('id')
-    console.log("idofEvent",this.id);
-    axios.get(`http://localhost:3000/api/event/selectOne/${this.id}`)
-    .then((result) => {
-      console.log(result);
-      this.title = result.data[0].title
-      this.description = result.data[0].description
-      this.type = result.data[0].type
-      this.image= result.data[0].image
-      this.date= result.data[0].date
-    });
+  mounted: function () {
+    this.id = localStorage.getItem("id");
+    console.log("idofEvent", this.id);
+    axios
+      .get(`http://localhost:3000/api/event/selectOne/${this.id}`)
+      .then((result) => {
+        console.log(result);
+        this.title = result.data[0].title;
+        this.description = result.data[0].description;
+        this.type = result.data[0].type;
+        this.image = result.data[0].image;
+        this.date = result.data[0].date;
+      });
   },
   data() {
     return {
-      id:'',
+      id: "",
       title: "",
       description: "",
-      type: '',
-      image: '',
-      date: '',
+      type: "",
+      image: "",
+      date: "",
     };
   },
   methods: {
@@ -112,15 +112,16 @@ export default {
           type: this.type,
         })
         .then((response) => {
-          console.log(response.data);
+          location.href = "/";
+          setTimeout(() => {
+            alert("Modified Successfully :)");
+            console.log(response);
+          }, 0.5);
+        })
+        .catch((error) => {
+          alert("Error Occured!! Please retry");
+          console.log(error);
         });
-    },
-    
-  },
-  props: {
-    //props come from home onclock on modif btn
-    event: {
-      id:1
     },
   },
 };
@@ -138,7 +139,7 @@ export default {
 #container {
   width: 100%;
   height: 100%;
-  padding: 30px;
+  padding: 10px;
   margin: 0;
   background-image: url("https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700432285.jpg");
   background-repeat: no-repeat;
@@ -146,10 +147,10 @@ export default {
 }
 #centeredDiv {
   width: 40%;
-  padding: 50px 20px;
+  padding: 25px 20px;
   background-color: rgb(0, 104, 95);
   color: white;
-  border-radius: 30px 0 30px 0;
+  border-radius: 50px 0 50px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -157,7 +158,7 @@ export default {
   margin: auto;
 }
 #element {
-  padding: 10px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -167,6 +168,7 @@ label {
   margin-bottom: 5px;
 }
 input {
+  width: 100%;
   padding: 8px;
   border-radius: 5px;
   font-size: 18px;
@@ -189,7 +191,7 @@ select option {
 }
 #modifBtn {
   margin-top: 20px;
-  background-color: rgb(81, 80, 80);
+  background-color: rgb(67, 83, 88);
   color: white;
   border: 3px solid #e7e7e7;
   padding: 10px 20px;

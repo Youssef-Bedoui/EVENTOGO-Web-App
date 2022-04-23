@@ -36,8 +36,8 @@
         <label>Event Image :</label>
         <input type="text" @change="onUpload" />
       </div>
-      <div  type="button" @click="handleSubmit()">
-        <router-link id="addBtn" to="/">Publish Your Event</router-link>
+      <div>
+        <button id="addBtn" @click="handleSubmit()">Publish Your Event</button>
       </div>
     </div>
   </div>
@@ -83,11 +83,15 @@ export default {
           type: this.type,
         })
         .then((response) => {
-          setTimeout(function () {
-            alert("Event Added successfully!");
-            location.reload();
-          }, 3000);
-          console.log(response.data);
+          location.href = "/";
+          setTimeout(() => {
+            alert("Added Successfully :)");
+            console.log(response);
+          }, 0.5);
+        })
+        .catch((error) => {
+          alert("Error Occured!! Please retry");
+          console.log(error);
         });
     },
     getSuccessMsg() {
@@ -111,15 +115,15 @@ export default {
 #container {
   width: 100%;
   height: 100%;
-  padding: 30px;
+  padding: 10px;
   margin: 0;
-  background-image:url("https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700432285.jpg");
+  background-image: url("https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700432285.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
 #centeredDiv {
   width: 40%;
-  padding: 50px 20px;
+  padding: 25px 20px;
   background-color: rgb(0, 104, 95);
   color: white;
   border-radius: 50px 0 50px 0;
@@ -130,7 +134,7 @@ export default {
   margin: auto;
 }
 #element {
-  padding: 10px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -140,6 +144,7 @@ label {
   margin-bottom: 5px;
 }
 input {
+  width: 100%;
   padding: 8px;
   border-radius: 5px;
   font-size: 18px;

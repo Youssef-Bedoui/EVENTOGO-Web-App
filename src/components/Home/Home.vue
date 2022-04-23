@@ -155,12 +155,15 @@ export default {
   margin: 30px 0;
   position: relative;
 }
+
 #image {
   width: 40%;
   height: 60%;
   display: block;
   float: left;
 }
+
+
 #img {
   border-radius: 5px;
   width: 100%;

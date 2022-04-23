@@ -28,10 +28,15 @@ export default {
         
       axios.post('http://localhost:3000/api/user/signin',person)
       .then(result=>{
-        console.log(result.data)
-        if(result.data[0]==='succesfully connected'){location.href = '/'}
+        //console.log(result.data)
+        
+         
+         if(result.data[0]==='succesfully connected'){
+           
+           localStorage.setItem("email", person.email);
+           location.href = '/'}
+        //console.log("persone result",result);
       })
-console.log(person);
     }
   }
 };

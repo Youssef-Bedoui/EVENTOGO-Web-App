@@ -156,16 +156,17 @@ export default {
   position: relative;
 }
 #image {
-  width: 40%;
-  height: 60%;
+  width: 45%;
+  height: 260px;
   display: block;
   float: left;
+  position: relative;
+  bottom: 40px;
 }
 #img {
   border-radius: 5px;
   width: 100%;
   height: 100%;
-  margin-left: 20px;
   display: block;
 }
 #text-right {

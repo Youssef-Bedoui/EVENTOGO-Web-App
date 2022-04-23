@@ -155,6 +155,7 @@ export default {
   margin: 30px 0;
   position: relative;
 }
+
 #image {
   width: 45%;
   height: 260px;
@@ -163,6 +164,8 @@ export default {
   position: relative;
   bottom: 40px;
 }
+
+
 #img {
   border-radius: 5px;
   width: 100%;

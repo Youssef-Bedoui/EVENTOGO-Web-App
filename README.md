@@ -103,4 +103,14 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 # checking
-updating
+
+
+
+# to do list
+
+[1]- signin signup style
+[1]- signin signup conditinal display
+[1]- search box
+[1]- general css
+[1]- profile
+[1]- admin delete

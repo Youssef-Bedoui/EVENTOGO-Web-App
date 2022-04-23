@@ -140,7 +140,7 @@ export default {
   width: 100%;
   height: 100%;
   padding: 10px;
-  margin: 0;
+  margin-top: 80px;
   background-image: url("https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700432285.jpg");
   background-repeat: no-repeat;
   background-size: cover;

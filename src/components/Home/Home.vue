@@ -149,11 +149,11 @@ nav {
 }
 .navleft {
   position: relative;
-  right: 15%;
+  right: 8%;
 }
 .navright {
   position: relative;
-  left: 28%;
+  left: 44%;
 }
 
 nav a {

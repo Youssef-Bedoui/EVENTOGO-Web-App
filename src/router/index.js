@@ -55,7 +55,7 @@ const routes = [
   {
     path: '/modif',
     name: 'modif',
-    component: () => import('../views/ModifView.vue')
+    component: () => import('../components/ModifEvent/ModifEvent.vue')
   },
 
 ]

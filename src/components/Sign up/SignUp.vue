@@ -35,8 +35,8 @@ export default {
       )
       .then(result=>{
         console.log(result.data);
-if(result.data[0]==='yes'){location.href = 'signin'}
-else {alert("user already exist")}
+        if(result.data[0]==='yes'){location.href = 'signin'}
+        else {alert("user already exist")}
       })
     }
   }

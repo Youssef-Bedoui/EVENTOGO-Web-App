@@ -1,33 +1,106 @@
 <template>
- <nav>
-      <img
-        id="logo"
-        src="./img/278719454_518845159791717_4455080078741522629_n.png"
-      />
-      <div class="navleft">
-        <router-link
-          to="/"
-          style="
-            color: orange;
-            text-transform: uppercase;
-            border-bottom: 3px solid;
-          "
-          >Dashboard</router-link
-        >|
-        <router-link to="/add">Add Event</router-link>
-      </div>
-      <div class="navright">
-        <router-link to="/profile">Profile</router-link> |
-        <router-link to="/signup">Sign Up</router-link> |
-        <router-link to="/signin">Sign in</router-link> |
-        <router-link to="/">Logout</router-link>
-      </div>
-    </nav>
+
+  <nav v-if="logged === 'admin' || false">
+    <img
+      id="logo"
+      src="./img/278719454_518845159791717_4455080078741522629_n.png"
+    />
+    <div class="navleft">
+      <router-link
+        to="/"
+        style="
+          color: orange;
+          text-transform: uppercase;
+          border-bottom: 3px solid;
+        "
+        >Dashboard</router-link
+      >|
+      <router-link to="/add">Add Event</router-link>
+    </div>
+       <div class="navright">
+      <router-link to="/profile">Profile</router-link> |
+      <router-link to="/" @click="logOut()">Logout</router-link>
+    </div>
+  </nav>
+  <nav v-else-if="logged === 'user' || false">
+    <img
+      id="logo"
+      src="./img/278719454_518845159791717_4455080078741522629_n.png"
+    />
+    <div class="navleft">
+      <router-link
+        to="/"
+        style="
+          color: orange;
+          text-transform: uppercase;
+          border-bottom: 3px solid;
+        "
+        >Home</router-link
+      >|
+    </div>
+    <div class="navright">
+      <router-link to="/profile">Profile</router-link> |
+      <router-link to="/" @click="logOut()">Logout</router-link>
+    </div>
+  </nav>
+
+  <nav v-else>
+    <img
+      id="logo"
+      src="./img/278719454_518845159791717_4455080078741522629_n.png"
+    />
+    <div class="navleft">
+      <router-link
+        to="/"
+        style="
+          color: orange;
+          text-transform: uppercase;
+          border-bottom: 3px solid;
+        "
+        >Home</router-link
+      >|
+    </div>
+
+    <div class="navright">
+      <router-link to="/signup">Sign Up</router-link> |
+      <router-link to="/signin">Sign in</router-link> |
+    </div>
+  </nav>
+
   <div id="app">
-    
     <router-view />
   </div>
 </template>
+
+
+<script>
+export default {
+
+  data() {
+    return {
+      logged: "",
+    };
+  },
+  mounted(){
+    if(localStorage.getItem('logged')){
+      this.logged = localStorage.getItem('logged') 
+    }
+  },
+  methods:{
+
+    logOut(){
+      if(localStorage.getItem('logged')){
+         localStorage.removeItem('logged');
+         this.logged = false;
+
+      }
+    }
+  },
+
+}
+</script>
+
+
 
 <style>
 #app {
@@ -45,6 +118,8 @@
   height: 60px;
 }
 nav {
+  width: 80%;
+  margin: auto;
   background-color: white;
   /* background-image: url(""); */
   background-size: cover;
@@ -87,5 +162,4 @@ nav a:hover {
 nav a.router-link-active {
   color: #eb8190;
 }
-
 </style>

@@ -27,10 +27,10 @@
 
         <div id="buttons">
           <!-- <button id="favoriteBtn" v-on:click="postFavorite">Favorite</button> -->
-          <button id="editBtn" :value="elem.id" @click="edit($event)">
+          <button v-if="logged && logged=='admin'" id="editBtn" :value="elem.id" @click="edit($event)">
             Edit
           </button>
-          <button id="deleteBtn">Delete</button>
+          <button v-if="logged" id="deleteBtn">Delete</button>
         </div>
       </div>
     </div>
@@ -46,6 +46,7 @@ export default {
   mounted: function () {
     axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
       this.events = result.data;
+      this.logged = localStorage.getItem("logged")
       // console.log(this.events);
     });
   },
@@ -82,6 +83,7 @@ export default {
     return {
       searchInput: "",
       events: null,
+      logged: null,
     };
   },
 };

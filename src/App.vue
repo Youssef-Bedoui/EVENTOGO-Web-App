@@ -17,11 +17,13 @@
         "
         >Dashboard</router-link
       >|
+
       <router-link to="/add">Add Event</router-link>
     </div>
        <div class="navright">
-      <router-link to="/profile">Profile</router-link> |
-      <router-link to="/" @click="logOut()">Logout</router-link>
+          <router-link to="/about">About</router-link> |
+          <router-link to="/profile">Profile</router-link> |
+          <router-link to="/" @click="logOut()">Logout</router-link>
     </div>
   </nav>
 <!--  -->
@@ -31,6 +33,9 @@
       id="logo"
       src="./img/278719454_518845159791717_4455080078741522629_n.png"
     />
+       <div>
+      <router-link to="/about">About</router-link> |
+    </div>
     <div class="navleft">
       <router-link
         to="/"
@@ -43,6 +48,7 @@
       >|
     </div>
     <div class="navright">
+      <router-link to="/about">About</router-link> |
       <router-link to="/profile">Profile</router-link> |
       <router-link to="/" @click="logOut()">Logout</router-link>
     </div>
@@ -65,8 +71,12 @@
         >Home</router-link
       >|
     </div>
+    <div>
+      <router-link to="/about">About</router-link> |
+    </div>
 
     <div class="navright">
+      <router-link to="/about">About</router-link> |
       <router-link to="/signup">Sign Up</router-link> |
       <router-link to="/signin">Sign in</router-link> |
     </div>
@@ -113,7 +123,7 @@ export default {
           });
 
     }else{
-      
+
         this.logged = null;
     }
   },

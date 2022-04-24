@@ -1,12 +1,10 @@
 <template>
 
   <nav v-if="logged  && logged === 'admin'">
-    <div class="logo">
     <img
       id="logo"
       src="./img/278719454_518845159791717_4455080078741522629_n.png"
     />
-    </div>
     <div class="navleft">
       <router-link
         to="/"
@@ -96,25 +94,35 @@ export default {
 
     if(localStorage.getItem('email')){
 
-        this.email= localStorage.getItem("email");
-        axios
-          .get(`http://localhost:3000/api/user/connected/${this.email}`)
-          .then((result) => {
-            const profile = {
-              name :result.data[0].name,
-              email :result.data[0].email,
-              role :result.data[0].role,
-            }
 
-          const userProfile = JSON.stringify(profile);
-          localStorage.setItem("userProfile", userProfile);
-          localStorage.setItem("logged", result.data[0].role);
-          this.logged = localStorage.getItem("logged")
-          });
+    this.email= localStorage.getItem("email");
+    console.log("emailOfTheLoggedUser", this.email);
+    axios
+      .get(`http://localhost:3000/api/user/connected/${this.email}`)
+      .then((result) => {
+        console.log(result.data);
 
-    }else{
+
+        this.name = result.data[0].name;
+        this.email = result.data[0].email;
+        this.role = result.data[0].role;
+
+        const profile = {
+          name :this.name,
+          email :this.email,
+          role :this.role,
+        }
+
+       const userProfile = JSON.stringify(profile);
+       localStorage.setItem("userProfile", userProfile);
+       localStorage.setItem("logged", result.data[0].role);
       
-        this.logged = null;
+       this.logged = localStorage.getItem("logged")
+       console.log("our local storage", localStorage.getItem("logged"))
+        
+      });
+    }else{
+      this.logged = null;
     }
   },
   methods:{
@@ -142,17 +150,22 @@ export default {
   color: #2c3e50;
 }
 #logo {
+  position: relative;
+  left: 45%;
   font-size: 30px;
+  float: right;
   height: 60px;
 }
 nav {
   width: 80%;
   margin: auto;
   background-color: white;
+  /* background-image: url(""); */
   background-size: cover;
   padding: 20px;
   display: flex;
-  justify-content:space-between;
+  flex-direction: row;
+  align-items: center;
   height: 20px;
   position: fixed;
   top: 0;
@@ -161,9 +174,13 @@ nav {
   z-index: 1;
 }
 .navleft {
-  justify-content: flex-end;
+  position: relative;
+  right: 15%;
 }
-
+.navright {
+  position: relative;
+  left: 28%;
+}
 
 nav a {
   font-weight: bold;

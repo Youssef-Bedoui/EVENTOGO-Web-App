@@ -5,13 +5,13 @@
 
 
       <div id="element">
-        <h2>Name : {{this.name}}</h2>
+        <h2>Name : {{this.user.name}}</h2>
       </div>
       <div id="element">
-        <h2>Email : {{this.email}}</h2>
+        <h2>Email : {{this.user.email}}</h2>
       </div>
       <div id="element">
-        <h2>Role : {{this.role}}</h2>
+        <h2>Role : {{this.user.role}}</h2>
       </div>
       <!--  -->
       <!--  -->
@@ -22,31 +22,34 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
 
 export default {
   name: "ProfileView",
   mounted: function () {
-    this.email= localStorage.getItem("email");
-    console.log("emailOfTheLoggedUser", this.email);
-    axios
-      .get(`http://localhost:3000/api/user/connected/${this.email}`)
-      .then((result) => {
-        console.log(result.data);
-        this.name = result.data[0].name;
-        this.email = result.data[0].email;
-        this.role = result.data[0].role;
-       localStorage.setItem("logged", result.data[0].role);
+    // this.email= localStorage.getItem("email");
+    // console.log("emailOfTheLoggedUser", this.email);
+    // axios
+    //   .get(`http://localhost:3000/api/user/connected/${this.email}`)
+    //   .then((result) => {
+    //     console.log(result.data);
+    //     this.name = result.data[0].name;
+    //     this.email = result.data[0].email;
+    //     this.role = result.data[0].role;
+    //    localStorage.setItem("logged", result.data[0].role);
       
-       console.log("our local storage", localStorage.getItem("logged"))
+    //    console.log("our local storage", localStorage.getItem("logged"))
         
-      });
+    //   });
   },
   data() {
     return {
-      id: "",
-      name: "",
-      email: "",
+
+      user : JSON.parse(window.localStorage.getItem("userProfile")),
+      // id: "",
+      // name: "",
+      // email: "",
+      // role: "",
     };
   },
   methods: {

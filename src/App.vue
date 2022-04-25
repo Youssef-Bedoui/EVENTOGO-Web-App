@@ -45,7 +45,6 @@
       >|
     </div>
     <div class="navright">
-      <router-link to="/about">About</router-link> |
       <router-link to="/profile">Profile</router-link> |
       <router-link to="/" @click="logOut()">Logout</router-link>
     </div>
@@ -71,7 +70,6 @@
     <div><router-link to="/about">About</router-link> |</div>
 
     <div class="navright">
-      <router-link to="/about">About</router-link> |
       <router-link to="/signup">Sign Up</router-link> |
       <router-link to="/signin">Sign in</router-link> |
     </div>
@@ -84,6 +82,7 @@
 
 
 <script>
+
 import axios from "axios";
 export default {
   data() {
@@ -150,7 +149,7 @@ nav {
   padding: 20px;
   display: flex;
   justify-content: space-between;
-  height: 40px;
+  height: 80px;
   position: fixed;
   top: 0;
   left: 0;

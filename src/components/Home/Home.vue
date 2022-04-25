@@ -27,10 +27,17 @@
 
         <div id="buttons">
           <!-- <button id="favoriteBtn" v-on:click="postFavorite">Favorite</button> -->
-          <button v-if="logged && logged=='admin'" id="editBtn" :value="elem.id" @click="edit($event)">
+          <button
+            v-if="logged && logged == 'admin'"
+            id="editBtn"
+            :value="elem.id"
+            @click="edit($event)"
+          >
             Edit
           </button>
-          <button v-if="logged" id="deleteBtn">Delete</button>
+          <button id="deleteBtn" :value="elem.id" @click="delet($event)">
+            Delete
+          </button>
         </div>
       </div>
     </div>
@@ -46,7 +53,7 @@ export default {
   mounted: function () {
     axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
       this.events = result.data;
-      this.logged = localStorage.getItem("logged")
+      this.logged = localStorage.getItem("logged");
       // console.log(this.events);
     });
   },
@@ -76,6 +83,18 @@ export default {
       this.filterFunction();
       // location.href=("/");
       console.log(this.searchInput, "clicked");
+    },
+    delet(event) {
+      console.log(event.target.value);
+      var id = event.target.value;
+      axios
+        .delete(`http://localhost:3000/api/event/delete/${id}`)
+        .then((result) => {
+          console.log(result);
+          this.events.splice(id - 1, 1);
+          localStorage.setItem("id", event.target.value);
+          location.href = "/";
+        });
     },
   },
   //  this data for testing the map
@@ -166,7 +185,6 @@ export default {
   position: relative;
   bottom: 40px;
 }
-
 
 #img {
   border-radius: 5px;

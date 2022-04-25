@@ -1,6 +1,5 @@
 <script>
 import axios from "axios";
-// import { useLink } from 'vue-router';
 export default {
   data() {
     return {

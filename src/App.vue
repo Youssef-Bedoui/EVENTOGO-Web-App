@@ -1,4 +1,5 @@
 <template>
+  
   <nav v-if="logged && logged === 'admin'">
     <div class="logo">
       <img
@@ -51,7 +52,7 @@
   </nav>
   <!--  -->
   <!--  -->
-  <nav v-else>
+  <nav v-if='user==null'>
     <img
       id="logo"
       src="./img/278719454_518845159791717_4455080078741522629_n.png"
@@ -83,36 +84,31 @@
 
 <script>
 
-import axios from "axios";
+// import axios from "axios";
+
 export default {
   data() {
     return {
       logged: null,
-      name: "",
-      email: "",
-      role: "",
+      name: null,
+      email: null,
+      role: null,
+      id:null,
+      user:null
     };
   },
+  
   mounted() {
-    if (localStorage.getItem("email")) {
-      this.email = localStorage.getItem("email");
-      axios
-        .get(`http://localhost:3000/api/user/connected/${this.email}`)
-        .then((result) => {
-          const profile = {
-            name: result.data[0].name,
-            email: result.data[0].email,
-            role: result.data[0].role,
-          };
-
-          const userProfile = JSON.stringify(profile);
-          localStorage.setItem("userProfile", userProfile);
-          localStorage.setItem("logged", result.data[0].role);
-          this.logged = localStorage.getItem("logged");
-        });
-    } else {
-      this.logged = null;
-    }
+    var use = localStorage.getItem("user");
+    console.log(use);
+    if (use) {
+    
+      console.log(use);
+       this.user=use[0]
+       this.id=this.user.id
+          this.logged = this.user.role
+     
+    } 
   },
   methods: {
     logOut() {

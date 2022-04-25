@@ -28,13 +28,15 @@ export default {
 
   name: "ProfileView",
   mounted: function () {
+    this.user=JSON.parse(localStorage.getItem("user"))
      axios.get(`http://localhost:3000/api/event/selectAllById/${this.user.id}`).then((result) => {
-      console.log(result.data);
+      console.log(result.data);  
+      this.events=result.data    
     });
   },
   data() {
     return {
-      user : JSON.parse(window.localStorage.getItem("user")),
+      user : JSON.parse(window.localStorage.getItem("userProfile")),
     };
   },
 

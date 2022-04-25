@@ -47,7 +47,7 @@
         />
       </div>
       <div>
-        <button id="modifBtn" @click="handleSubmit()">Submit Changes</button>
+        <button id="modifBtn" @click="handleSubmit()" >Submit Changes</button>
       </div>
     </div>
   </div>

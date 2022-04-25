@@ -27,10 +27,17 @@
 
         <div id="buttons">
           <!-- <button id="favoriteBtn" v-on:click="postFavorite">Favorite</button> -->
-          <button id="editBtn" :value="elem.id" @click="edit($event)">
+          <button
+            v-if="logged && logged == 'admin'"
+            id="editBtn"
+            :value="elem.id"
+            @click="edit($event)"
+          >
             Edit
           </button>
-          <button id="deleteBtn">Delete</button>
+          <button id="deleteBtn" :value="elem.id" @click="delet($event)">
+            Delete
+          </button>
         </div>
       </div>
     </div>
@@ -46,6 +53,7 @@ export default {
   mounted: function () {
     axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
       this.events = result.data;
+      this.logged = localStorage.getItem("logged");
       // console.log(this.events);
     });
   },
@@ -76,12 +84,25 @@ export default {
       // location.href=("/");
       console.log(this.searchInput, "clicked");
     },
+    delet(event) {
+      console.log(event.target.value);
+      var id = event.target.value;
+      axios
+        .delete(`http://localhost:3000/api/event/delete/${id}`)
+        .then((result) => {
+          console.log(result);
+          this.events.splice(id - 1, 1);
+          localStorage.setItem("id", event.target.value);
+          location.href = "/";
+        });
+    },
   },
   //  this data for testing the map
   data() {
     return {
       searchInput: "",
       events: null,
+      logged: null,
     };
   },
 };
@@ -155,17 +176,20 @@ export default {
   margin: 30px 0;
   position: relative;
 }
+
 #image {
-  width: 40%;
-  height: 60%;
+  width: 45%;
+  height: 260px;
   display: block;
   float: left;
+  position: relative;
+  bottom: 40px;
 }
+
 #img {
   border-radius: 5px;
   width: 100%;
   height: 100%;
-  margin-left: 20px;
   display: block;
 }
 #text-right {

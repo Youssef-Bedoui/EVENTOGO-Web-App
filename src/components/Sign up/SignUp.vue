@@ -35,78 +35,125 @@ export default {
       )
       .then(result=>{
         console.log(result.data);
-if(result.data[0]==='yes'){location.href = 'signin'}
-else {alert("user already exist")}
+        if(result.data[0]==='yes'){location.href = 'signin'}
+        else {alert("user already exist")}
       })
     }
   }
 };
 </script>
+
+
+
+
+
 <template>
-    <div class="vue-tempalte">
-        <div class="form">
-            <h3>Sign Up</h3>
-            <div class="form-group">
-                <h4>Full Name</h4>
-                <input type="text" name="nameInput" @change="nameInput($event)"/>
-            </div>
-            <div class="form-group">
-                <h4>Email address</h4>
-                <input type="email" name="emailInput" @change="emailInput($event)" required>
-            </div>
-            <div class="form-group">
-                <h4>Password</h4>
-                <input type="password" name="passwordInput" @change="passwordInput($event)" required>
-            </div>
-            <button class="btn" @click="post()" >
-                
-          Sign Up
-        </button>
-            <p class="text-right">
-                Already registered 
-                <router-link :to="{name: 'signin'}">sign in?</router-link>
-            </p>
-        </div>
-    </div>
-</template>
-<style>
-.vue-tempalte {
-  background-color: #f5f5f5;
-  border-radius: 10px;
-  width: 300px;
-  height: 300px;
-  position: relative;
-  left: 37%;
-}
-
-input {
-  height: 40px;
-  width: 150px;
-  border: 1px solid rgb(235, 235, 235);
-  border-radius: 10px;
+    <div id="container">
+    <div id="centeredDiv">
+      <h2 id="title">Sign Up</h2>
   
-}
-.h4{
-    margin-right: 30px;
-    
-}
-h6{
-    margin-bottom: 20px;
-}
-h3{
-    text-align: center;
-}
-.form-group {
-  display: flex;
-  flex-direction: row;
-}
+      <div id="element">
+        <label>Name :</label>
+        <input type="email" name="nameInput" placeholder="name" @change="nameInput($event)" required>
+      </div>
+      <div id="element">
+        <label>Email :</label>
+        <input type="email" name="emailInput" placeholder="email" @change="emailInput($event)" required>
+      </div>
+      <div id="element">
+        <label>Password :</label>
+        <input type="password" name="passwordInput" placeholder="password" @change="passwordInput($event)" required>
+      </div>
 
-.btn {
-  height: 40px;
-  width: 150px;
-  border: 1px solid rgb(235, 235, 235);
-  border-radius: 10px;
-  background-color: rgba(2, 107, 245, 0.733);
-  color: #f5f5f5;
+      <div>
+        <button id="addBtn" @click="post">Send</button>
+           <p class="text-right">
+                Already registered 
+                <router-link :to="{name: 'signin'}" style="color: red">sign in?</router-link>
+            </p>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+* {
+  box-sizing: border-box;
+}
+#title {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+#container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  margin-top: 80px;
+  background-image: url("https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700432285.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#centeredDiv {
+  width: 40%;
+  padding: 25px 20px;
+  background-color: rgb(0, 104, 95);
+  color: white;
+  border-radius: 50px 0 50px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+#element {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 80%;
+}
+label {
+  margin-bottom: 5px;
+}
+input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+input:focus {
+  background-color: #e7e7e7;
+}
+#types {
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+select {
+  border-radius: 5px;
+}
+select option {
+  background-color: rgb(226, 223, 210);
+}
+#addBtn {
+  margin-top: 20px;
+  background-color: rgb(81, 80, 80);
+  color: white;
+  border: 3px solid #e7e7e7;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px white;
+  transition: all 0.3s ease 0s;
+  font-weight: bold;
+  font-size: 20px;
+}
+#addBtn:hover {
+  border: 3px solid #000000;
+  box-shadow: 0px 2px 5px white;
+  background-color: rgba(1, 149, 53, 0.984);
 }
 </style>

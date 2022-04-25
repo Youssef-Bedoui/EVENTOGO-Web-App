@@ -136,7 +136,7 @@
           <button
             href="#"
             class="btn btn-primary"
-            v-if="logged && logged == 'admin'"
+            v-if="this.user.role== 'admin'"
             :value="elem.id"
             @click="edit($event)"
           >
@@ -145,7 +145,7 @@
           <button
             href="#"
             class="btn btn-danger"
-            v-if="logged && logged == 'admin'"
+            v-if="this.user.role== 'admin'"
             :value="elem.id"
             @click="delet($event)"
           >
@@ -169,10 +169,15 @@ export default {
   name: "HomeView",
   props: {},
   mounted: function () {
+    
+    var use=JSON.parse(localStorage.getItem("user"))
+
+    this.user=use[0]
+    console.log(this.user);
+
     axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
       this.events = result.data;
-      this.logged = localStorage.getItem("logged");
-      // console.log(this.events);
+      console.log(this.events);
     });
   },
   methods: {
@@ -216,7 +221,7 @@ export default {
   data() {
     return {
       events: null,
-      logged: null,
+      user: {}
     };
   },
 };

@@ -28,7 +28,7 @@ export default {
 
       axios.post("http://localhost:3000/api/user/signin", person)
         .then((result) => {
-          console.log(result.data);
+          console.log(result);
           if (result.data[0] === "yes") {
             localStorage.setItem("user",JSON.stringify(result.data[1]))
             location.href = "/";

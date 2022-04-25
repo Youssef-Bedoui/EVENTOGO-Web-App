@@ -61,7 +61,6 @@ export default {
           type="email"
           name="emailInput"
           @change="emailInput($event)"
-          required
         />
       </div>
       <div class="form-group">
@@ -70,7 +69,6 @@ export default {
           type="password"
           name="passwordInput"
           @change="passwordInput($event)"
-          required
         />
       </div>
       <button class="btn" @click="post()">Sign Up</button>

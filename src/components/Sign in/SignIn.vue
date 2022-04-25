@@ -1,6 +1,5 @@
 <script>
 import axios from "axios";
-// import { useLink } from 'vue-router';
 export default {
   data() {
     return {
@@ -31,8 +30,9 @@ export default {
         .then((result) => {
           console.log(result);
           if (result.data[0] === "yes") {
-            localStorage.setItem("user",JSON.stringify(result.data[0]))
+            localStorage.setItem("user",JSON.stringify(result.data[1]))
             location.href = "/";
+            
           }
         
         });

@@ -23,7 +23,7 @@
       <div id="element">
         <label>Event Type :</label>
         <select name="types" id="types" @change="switchSelect($event)">
-          <option hidden selected>Event Type</option>
+          <option hidden selected>{{this.type}}</option>
           <option value="Cultural">Cultural</option>
           <option value="Entertainment">Entertainment</option>
           <option value="Social">Social</option>
@@ -47,7 +47,7 @@
         />
       </div>
       <div>
-        <button id="modifBtn" @click="handleSubmit()">Submit Changes</button>
+        <button id="modifBtn" @click="handleSubmit()" >Submit Changes</button>
       </div>
     </div>
   </div>

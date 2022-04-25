@@ -30,8 +30,9 @@ export default {
         .then((result) => {
           console.log(result.data);
           if (result.data[0] === "yes") {
-            localStorage.setItem("user",JSON.stringify(result.data[0]))
+            localStorage.setItem("user",JSON.stringify(result.data[1]))
             location.href = "/";
+            
           }
         
         });

@@ -21,7 +21,7 @@ export default {
 
       console.log(this.password);
     },
-    post() {
+   post() {
       console.log(this.email);
       var person = {};
       person["password"] = this.password;
@@ -31,12 +31,11 @@ export default {
         .then((result) => {
           console.log(result.data);
           if (result.data[0] === "yes") {
-            localStorage.setItem("user",JSON.stringify(result.data[1]))
+            localStorage.setItem("user",JSON.stringify(result.data[0]))
             location.href = "/";
           }
         
         });
-
     }
   },
 };

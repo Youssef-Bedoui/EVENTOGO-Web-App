@@ -53,7 +53,7 @@ export default {
   mounted: function () {
     axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
       this.events = result.data;
-      this.logged = localStorage.getItem("logged");
+      this.logged = localStorage.getItem("user");
       // console.log(this.events);
     });
   },

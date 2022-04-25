@@ -1,59 +1,76 @@
 <script>
-import axios from "axios"
+import axios from "axios";
+// import { useLink } from 'vue-router';
 export default {
   data() {
     return {
-    email:"",
-    password:""
+      email: "",
+      password: ""
     };
   },
-  mounted(){
 
-  },
-  methods:{
-     emailInput(event) {
-      this.email= event.target.value; 
+  mounted() {},
+  methods: {
+   
+    emailInput(event) {
+      this.email = event.target.value;
+      console.log(this.email);
     },
-     passwordInput(event) {
-      this.password= event.target.value; 
+    passwordInput(event) {
+      this.password = event.target.value;
+
+      console.log(this.password);
     },
-    post(){
-      var person={}
-        person["password"]=this.password
-        person["email"]=this.email
+   post() {
+      console.log(this.email);
+      var person = {};
+      person["password"] = this.password;
+      person["email"] = this.email;
+
+      axios.post("http://localhost:3000/api/user/signin", person)
+        .then((result) => {
+          console.log(result.data);
+          if (result.data[0] === "yes") {
+            localStorage.setItem("user",JSON.stringify(result.data[0]))
+            location.href = "/";
+          }
         
-      axios.post('http://localhost:3000/api/user/signin',person)
-      .then(result=>{
-         if(result.data[0]==='succesfully connected'){
-           localStorage.setItem("email", person.email);
-           location.href = '/'}
-      })
+        });
     }
-  }
+  },
 };
 </script>
 <template>
-    <div id="container">
-    <div id="centeredDiv">
-      <h2 id="title">Sign in</h2>
-  
-      <div id="element">
-        <label>Email :</label>
-        <input type="email" name="emailInput" placeholder="email" @change="emailInput($event)" required>
+  <div class="signin">
+    <div class="form">
+      <h3>Sign In</h3>
+      <div class="form-group">
+        <div class="h4">
+          <h4>Email</h4>
+          <h4>Password</h4>
+        </div>
+        <div class="input">
+          <input
+            type="email"
+            name="emailInput"
+            placeholder="email"
+            @change="emailInput($event)"
+            required
+          />
+          <input
+            type="password"
+            name="passwordInput"
+            placeholder="password"
+            @change="passwordInput($event)"
+            required
+          />
+        </div>
       </div>
-      <div id="element">
-        <label>Event Date :</label>
-        <input type="password" name="passwordInput" placeholder="password" @change="passwordInput($event)" required>
-      </div>
+      <button class="btn" @click="post">Sign In</button>
 
-      <div>
-        <button id="addBtn" @click="post">Send</button>
-      </div>
     </div>
   </div>
 </template>
-
-
 
 
 
@@ -86,6 +103,7 @@ export default {
   justify-content: center;
   align-items: center;
   margin: auto;
+
 }
 #element {
   padding: 5px;

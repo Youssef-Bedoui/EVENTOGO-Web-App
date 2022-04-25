@@ -1,11 +1,10 @@
 <template>
-
-  <nav v-if="logged  && logged === 'admin'">
+  <nav v-if="logged && logged === 'admin'">
     <div class="logo">
-    <img
-      id="logo"
-      src="./img/278719454_518845159791717_4455080078741522629_n.png"
-    />
+      <img
+        id="logo"
+        src="./img/278719454_518845159791717_4455080078741522629_n.png"
+      />
     </div>
     <div class="navleft">
       <router-link
@@ -20,22 +19,20 @@
 
       <router-link to="/add">Add Event</router-link>
     </div>
-       <div class="navright">
-          <router-link to="/about">About</router-link> |
-          <router-link to="/profile">Profile</router-link> |
-          <router-link to="/" @click="logOut()">Logout</router-link>
+    <div class="navright">
+      <router-link to="/about">About</router-link> |
+      <router-link to="/profile">Profile</router-link> |
+      <router-link to="/" @click="logOut()">Logout</router-link>
     </div>
   </nav>
-<!--  -->
-<!--  -->
-  <nav v-else-if="logged  && logged === 'user'">
+  <!--  -->
+  <!--  -->
+  <nav v-else-if="logged && logged === 'user'">
     <img
       id="logo"
       src="./img/278719454_518845159791717_4455080078741522629_n.png"
     />
-       <div>
-      <router-link to="/about">About</router-link> |
-    </div>
+    <div><router-link to="/about">About</router-link> |</div>
     <div class="navleft">
       <router-link
         to="/"
@@ -53,8 +50,8 @@
       <router-link to="/" @click="logOut()">Logout</router-link>
     </div>
   </nav>
-<!--  -->
-<!--  -->
+  <!--  -->
+  <!--  -->
   <nav v-else>
     <img
       id="logo"
@@ -71,9 +68,7 @@
         >Home</router-link
       >|
     </div>
-    <div>
-      <router-link to="/about">About</router-link> |
-    </div>
+    <div><router-link to="/about">About</router-link> |</div>
 
     <div class="navright">
       <router-link to="/about">About</router-link> |
@@ -91,54 +86,46 @@
 <script>
 import axios from "axios";
 export default {
-
   data() {
     return {
       logged: null,
       name: "",
       email: "",
       role: "",
-      
     };
   },
-  mounted(){
-
-
-    if(localStorage.getItem('email')){
-
-        this.email= localStorage.getItem("email");
-        axios
-          .get(`http://localhost:3000/api/user/connected/${this.email}`)
-          .then((result) => {
-            const profile = {
-              name :result.data[0].name,
-              email :result.data[0].email,
-              role :result.data[0].role,
-            }
+  mounted() {
+    if (localStorage.getItem("email")) {
+      this.email = localStorage.getItem("email");
+      axios
+        .get(`http://localhost:3000/api/user/connected/${this.email}`)
+        .then((result) => {
+          const profile = {
+            name: result.data[0].name,
+            email: result.data[0].email,
+            role: result.data[0].role,
+          };
 
           const userProfile = JSON.stringify(profile);
           localStorage.setItem("userProfile", userProfile);
           localStorage.setItem("logged", result.data[0].role);
-          this.logged = localStorage.getItem("logged")
-          });
-
-    }else{
-
-        this.logged = null;
+          this.logged = localStorage.getItem("logged");
+        });
+    } else {
+      this.logged = null;
     }
   },
-  methods:{
-    logOut(){
-      if(localStorage.getItem('logged')){
-         localStorage.removeItem('logged');
-         localStorage.removeItem('email');
-         location.href = '/';
-         console.log("our local storage", this.logged)
+  methods: {
+    logOut() {
+      if (localStorage.getItem("logged")) {
+        localStorage.removeItem("logged");
+        localStorage.removeItem("email");
+        location.href = "/";
+        console.log("our local storage", this.logged);
       }
     },
   },
-
-}
+};
 </script>
 
 
@@ -156,24 +143,25 @@ export default {
   height: 60px;
 }
 nav {
-  width: 80%;
+  width: 90%;
   margin: auto;
   background-color: white;
   background-size: cover;
   padding: 20px;
   display: flex;
-  justify-content:space-between;
-  height: 20px;
+  justify-content: space-between;
+  height: 40px;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1;
+  border-radius: 0 0 25px 25px;
+  margin-bottom: 5px;
 }
 .navleft {
   justify-content: flex-end;
 }
-
 
 nav a {
   font-weight: bold;

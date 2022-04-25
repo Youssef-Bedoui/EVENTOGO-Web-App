@@ -1,46 +1,172 @@
 <template>
   <div id="home">
-    <div class="wrapper">
-      <img
-        class="search-icon"
-        src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU2Ljk2NiA1Ni45NjYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDU2Ljk2NiA1Ni45NjY7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij4KPHBhdGggZD0iTTU1LjE0Niw1MS44ODdMNDEuNTg4LDM3Ljc4NmMzLjQ4Ni00LjE0NCw1LjM5Ni05LjM1OCw1LjM5Ni0xNC43ODZjMC0xMi42ODItMTAuMzE4LTIzLTIzLTIzcy0yMywxMC4zMTgtMjMsMjMgIHMxMC4zMTgsMjMsMjMsMjNjNC43NjEsMCw5LjI5OC0xLjQzNiwxMy4xNzctNC4xNjJsMTMuNjYxLDE0LjIwOGMwLjU3MSwwLjU5MywxLjMzOSwwLjkyLDIuMTYyLDAuOTIgIGMwLjc3OSwwLDEuNTE4LTAuMjk3LDIuMDc5LTAuODM3QzU2LjI1NSw1NC45ODIsNTYuMjkzLDUzLjA4LDU1LjE0Niw1MS44ODd6IE0yMy45ODQsNmM5LjM3NCwwLDE3LDcuNjI2LDE3LDE3cy03LjYyNiwxNy0xNywxNyAgcy0xNy03LjYyNi0xNy0xN1MxNC42MSw2LDIzLjk4NCw2eiIgZmlsbD0iIzAwMDAwMCIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K"
-      />
-      <input
-        class="search"
-        placeholder="Search"
-        type="text"
-        @change="inputData($event)"
-        @keypress.enter="handleSearch(this.searchInput)"
-      />
+    <div
+      id="carouselExampleIndicators"
+      class="carousel slide"
+      data-ride="carousel"
+    >
+      <ol class="carousel-indicators">
+        <li
+          data-target="#carouselExampleIndicators"
+          data-slide-to="0"
+          class="active"
+        ></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img
+            src="http://www.tourismsaskatchewan.com/-/media/things-to-do/events/sasktel-centre-concert-events.ashx"
+            class="d-block w-100"
+            alt=""
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://i.pinimg.com/originals/82/de/58/82de585c4523567d9797322d6fe3981d.jpg"
+            class="d-block w-100"
+            alt=""
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://circulareconomy.europa.eu/sites/all/themes/cecon_theme/images/events.jpg"
+            class="d-block w-100"
+            alt=""
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://www.durstonefarm.co.uk/wp-content/uploads/sites/21/2017/11/a1-2.jpg"
+            class="d-block w-100"
+            alt=""
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://res.infoq.com/articles/navigating-cultural-differences/en/headerimage/navigating-cultural-differences-1566840346418.jpg"
+            class="d-block w-100"
+            alt=""
+          />
+        </div>
+      </div>
+      <a
+        class="carousel-control-prev"
+        href="#carouselExampleIndicators"
+        role="button"
+        data-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a
+        class="carousel-control-next"
+        href="#carouselExampleIndicators"
+        role="button"
+        data-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
+    <!-- navbar search -->
+    <nav class="navbar navbar-light bg-light">
+      <form class="container-fluid justify-content-center">
+        <button
+          class="btn btn-outline-secondary"
+          value="Cultural"
+          @click="handleCulture()"
+        >
+          Cultural
+        </button>
+        <button
+          class="btn btn-sm btn-outline-secondary"
+          type="button"
+          value="Entertainment"
+          @click="handleEntertainment(this.value)"
+        >
+          Entertainment
+        </button>
+        <button
+          class="btn btn-sm btn-outline-secondary"
+          type="button"
+          value="Social"
+          @click="handlesocial(this.value)"
+        >
+          Social
+        </button>
+        <button
+          class="btn btn-sm btn-outline-secondary"
+          type="button"
+          value="Religious"
+          @click="handleRelogion(this.value)"
+        >
+          Religious
+        </button>
+      </form>
+    </nav>
+    <!-- card -->
     <div id="container">
-      <div class="card" v-for="(elem, i) in this.events" :key="i">
-        <h2 id="title">{{ elem.title }}</h2>
-        <div id="image">
-          <img id="img" :src="elem.image" />
-        </div>
-        <div id="text-right">
-          <p id="date">Date: {{ elem.date }}</p>
-          <p id="category">{{ elem.type }} Event</p>
-          <p id="description">About Event: {{ elem.description }}</p>
-        </div>
-
-        <div id="buttons">
-          <!-- <button id="favoriteBtn" v-on:click="postFavorite">Favorite</button> -->
+      <div
+        class="card"
+        style="width: 18rem"
+        v-for="(elem, i) in this.events"
+        :key="i"
+      >
+        <img v-bind:src="elem.image" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-favorite" v-on:click="postFavorite">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-heart-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+              />
+            </svg>
+          </h5>
+          <h5 class="card-title" id="title">{{ elem.title }}</h5>
+          <p class="card-text" id="category">{{ elem.type }}</p>
+          <p class="card-text" id="date">
+            {{ elem.date }}
+          </p>
+          <p class="card-text" id="description">
+            {{ elem.description }}
+          </p>
           <button
-            v-if="logged && logged == 'admin'"
-            id="editBtn"
+            href="#"
+            class="btn btn-primary"
+            v-if="this.user.role== 'admin'"
             :value="elem.id"
             @click="edit($event)"
           >
             Edit
           </button>
-          <button id="deleteBtn" :value="elem.id" @click="delet($event)">
+          <button
+            href="#"
+            class="btn btn-danger"
+            v-if="this.user.role== 'admin'"
+            :value="elem.id"
+            @click="delet($event)"
+          >
             Delete
           </button>
         </div>
       </div>
     </div>
+  </div>
+  <div id="footer">
+    <h4>&copy; EVENTOGO TUNISIA , All rights Reserved 2022-2023</h4>
+    <p>Thank you for visiting our website</p>
   </div>
 </template>
 
@@ -51,10 +177,15 @@ export default {
   name: "HomeView",
   props: {},
   mounted: function () {
+    
+    var use=JSON.parse(localStorage.getItem("user"))
+
+    this.user=use[0]
+    console.log(this.user);
+
     axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
       this.events = result.data;
-      this.logged = localStorage.getItem("logged");
-      // console.log(this.events);
+      console.log(this.events);
     });
   },
   methods: {
@@ -69,21 +200,6 @@ export default {
       localStorage.setItem("id", event.target.value);
       location.href = "/modif";
     },
-    inputData(event) {
-      this.searchInput = event.target.value;
-      console.log(this.searchInput);
-    },
-    filterFunction(val) {
-      // this.events.filter((event) => {
-      //   event.type === this.searchInput;
-      // });
-      console.log(val, "filter");
-    },
-    handleSearch() {
-      this.filterFunction();
-      // location.href=("/");
-      console.log(this.searchInput, "clicked");
-    },
     delet(event) {
       console.log(event.target.value);
       var id = event.target.value;
@@ -96,63 +212,55 @@ export default {
           location.href = "/";
         });
     },
+    // handle search
+    handleCulture(value) {
+      axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
+        this.events = result.data.map((event) => {
+          event.type === value;
+        });
+        // console.log(this.events);
+      });
+    },
+    handleEntertainment() {},
+    handleSocial() {},
+    handleReligion() {},
   },
   //  this data for testing the map
   data() {
     return {
-      searchInput: "",
       events: null,
-      logged: null,
+      user: {}
     };
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #home {
   background-repeat: no-repeat;
   background-size: cover;
-  /* width: 100%; */
-  background-color: #eba2a3;
-  height: 1200px;
-  /* overflow-y: scroll; */
-  /* display: flex;
-  justify-content: space-between;
-  flex-direction: row; */
+  background-color: #dccaca;
+  height: auto;
   margin-top: 80px !important;
 }
-.wrapper {
+nav {
+  width: 100%;
+  border-radius: 0;
   display: flex;
-  justify-content: right;
-  min-width: 100px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-shrink: 2;
+  align-items: center;
+  justify-content: space-between;
+  z-index: auto;
 }
-.search {
-  position: relative;
-  border: 1px solid grey;
-  border-radius: 5px;
-  height: 30px;
-  width: 40%;
-  display: block;
-  float: right;
-  padding: 2px 23px 2px 30px;
-  outline: 0;
-  background-color: #f5f5f5;
-  font-size: 18px;
+.navbar {
+  background-color: #eb8190;
 }
-.search-icon {
-  position: relative;
-  width: 17px;
-  left: 25px;
-  z-index: 1;
-}
-.search:hover,
-.search:focus {
-  border: 1.5px solid #009688;
-  background-color: white;
-}
+
 #container {
-  /* width: 100%; */
+  width: 100%;
+  height: auto;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -165,39 +273,11 @@ export default {
     0 100px 80px rgba(0, 0, 0, 0.12);
 
   min-height: 200px;
-  width: 50vw;
-  margin: 100px auto;
-  background: white;
-  border-radius: 5px;
-  background-color: white;
-  width: 40%;
-  height: 300px;
   border: 1px solid black;
   margin: 30px 0;
-  position: relative;
 }
-
-#image {
-  width: 45%;
-  height: 260px;
-  display: block;
-  float: left;
-  position: relative;
-  bottom: 40px;
-}
-
-#img {
-  border-radius: 5px;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-#text-right {
-  width: 50%;
-  display: block;
-  float: right;
-  position: relative;
-  bottom: 30px;
+.carousel-inner {
+  height: 400px;
 }
 #title {
   text-transform: capitalize;
@@ -205,28 +285,30 @@ export default {
   width: 100%;
   background-color: #eb8190;
   color: black;
-  bottom: 20px;
   padding: 5px 0;
-  position: relative;
-  bottom: 20px;
 }
 #date {
   text-decoration: underline;
   font-weight: bold;
   font-size: 15px;
+  color: rgb(13, 36, 127);
 }
 #description {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
+  height: 30%;
+  background-color: rgb(217, 217, 217);
+  border-radius: 10px;
 }
 #category {
   color: white;
   font-weight: bold;
   background-color: red;
-  padding: 10px;
-  width: 70%;
+  padding: 3px;
+  width: auto;
   animation: category 1s infinite;
   border-radius: 10px;
+  text-align: center;
 }
 @keyframes category {
   0% {
@@ -239,36 +321,63 @@ export default {
     background-color: rgb(233, 64, 208);
   }
 }
-#buttons {
-  width: 200px;
+div .card-body {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
   position: relative;
-  bottom: 20px;
+}
+.card-img-top {
+  height: 20%;
+}
+.btn-primary {
+  margin: 2px;
+  width: 30%;
+  margin: auto;
+  position: absolute;
+  bottom: 5px;
+  right: 50%;
+}
+.btn-danger {
+  margin: 2px;
+  width: 30%;
+  margin: auto;
+  position: absolute;
+  bottom: 5px;
   left: 50%;
+  right: 50%;
+}
+#footer {
+  width: 100%;
+  padding: 5px auto;
+  margin-top: 0;
+  text-align: center;
+  background-color: rgb(79, 78, 78);
+  color: white;
+}
+.btn-outline-secondary {
+  margin: 0 20px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.card-favorite {
+  text-align: center;
+  cursor: pointer;
+  color: red;
+  padding: 5px;
+  border: 2px solid;
+  width: 30%;
+  display: block;
+  margin: 5px auto;
+}
+.card-favorite:hover {
+  background-color: red;
+  color: white;
+}
+.card-img-top {
+  height: 35%;
 }
 button {
-  padding: 10px 15px;
-  border-radius: 10px;
-  margin: 5px;
-}
-#editBtn {
-  background-color: #fef5ee;
-  color: #b94e58;
-  font-weight: bold;
-  font-size: 17px;
-  padding: 10px 25px;
-}
-#editBtn:hover {
-  color: #fef5ee;
-  background-color: #b94e58;
-}
-#deleteBtn {
-  background-color: #b94e58;
-  color: white;
-  font-weight: bold;
-  font-size: 17px;
-}
-#deleteBtn:hover {
-  color: #b94e58;
-  background-color: white;
+  cursor: pointer;
 }
 </style>

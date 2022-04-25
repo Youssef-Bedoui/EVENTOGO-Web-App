@@ -5,6 +5,7 @@
 </template>
 
 <script>
+
 import AddEvent from "../components/AddEvent/AddEvent.vue";
 
 export default {

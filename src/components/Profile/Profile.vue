@@ -36,8 +36,7 @@ export default {
   },
   data() {
     return {
-      user :{},
-      events:[]
+      user : JSON.parse(window.localStorage.getItem("userProfile")),
     };
   },
 

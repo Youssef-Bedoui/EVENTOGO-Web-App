@@ -34,7 +34,7 @@ export default {
   },
   data() {
     return {
-      user : JSON.parse(window.localStorage.getItem("user")),
+      user : JSON.parse(window.localStorage.getItem("userProfile")),
     };
   },
 

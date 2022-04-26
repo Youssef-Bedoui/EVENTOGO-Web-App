@@ -178,10 +178,13 @@ export default {
   props: {},
   mounted: function () {
     
-    var use=JSON.parse(localStorage.getItem("user"))
+    var user=JSON.parse(localStorage.getItem("user"))
 
-    this.user=use[0]
-    console.log(this.user);
+if(user){
+
+  this.user=user[0]
+  console.log(this.user);
+}
 
     axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
       this.events = result.data;

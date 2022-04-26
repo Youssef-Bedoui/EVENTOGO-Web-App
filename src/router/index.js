@@ -12,6 +12,16 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/calendar',
+    name: 'calendar',
+    component: () => import('../views/CalendarView.vue')
+  },
+  {
+    path: '/users',
+    name: 'users',
+    component: () => import('../views/AdminView.vue')
+  },
+  {
     path: '/profile',
     name: 'profile',
     component: () => import('../views/ProfileView.vue')

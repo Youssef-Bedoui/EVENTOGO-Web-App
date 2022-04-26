@@ -21,6 +21,8 @@
       <router-link to="/add">Add Event</router-link>
     </div>
     <div class="navright">
+      <router-link to="/users">users</router-link> |
+      <router-link to="/calendar">Calendar</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/favorite">My selection</router-link> |
       <router-link to="/profile">Profile</router-link> |
@@ -47,8 +49,10 @@
       >|
     </div>
     <div class="navright">
-      <router-link to="/about">About</router-link> |
-      <router-link to="/favorite">My selection</router-link> |
+
+      <router-link to="/users">users</router-link> |
+      <router-link to="/calendar">Calendar</router-link> |
+
       <router-link to="/profile">Profile</router-link> |
       <router-link to="/" @click="logOut()">Logout</router-link>
       

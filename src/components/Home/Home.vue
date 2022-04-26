@@ -79,32 +79,28 @@
         <p id="secondary-nav-text">SELECT BY TYPE :</p>
         <button
           class="btn btn-outline-secondary"
-          value="Cultural"
-          @click="handleCulture()"
+          @click="handleType($event,'Cultural')"
         >
           Cultural
         </button>
         <button
           class="btn btn-sm btn-outline-secondary"
           type="button"
-          value="Entertainment"
-          @click="handleEntertainment(this.value)"
+          @click="handleType($event,'Entertainment')"
         >
           Entertainment
         </button>
         <button
           class="btn btn-sm btn-outline-secondary"
           type="button"
-          value="Social"
-          @click="handlesocial(this.value)"
+          @click="handleType($event,'Social')"
         >
           Social
         </button>
         <button
           class="btn btn-sm btn-outline-secondary"
           type="button"
-          value="Religious"
-          @click="handleRelogion(this.value)"
+          @click="handleType($event,'Religious')"
         >
           Religious
         </button>
@@ -118,7 +114,6 @@
         :key="i">
         <img v-bind:src="elem.image" class="card-img" alt="..." />
         <div class="card-img-overlay">
-        
           <h5 class="card-favorite" 
           v-if="this.user.id"
           :value="elem.id"
@@ -156,37 +151,8 @@
             @click="delet($event)"
 
           >
-            <path
-              fill-rule="evenodd"
-              d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-            />
+            Delete
           
-        </button>
-        <h5 class="card-title" id="title">{{ elem.title }}</h5>
-        <p class="card-text" id="category">{{ elem.type }}</p>
-        <p class="card-text" id="date">
-          {{ elem.date }}
-        </p>
-        <p class="card-text" id="description">
-          {{ elem.description }}
-        </p>
-        <button
-          href="#"
-          class="btn btn-primary"
-          v-if="this.user.role == 'admin'"
-          :value="elem.id"
-          @click="edit($event)"
-        >
-          Edit
-        </button>
-        <button
-          href="#"
-          class="btn btn-danger"
-          v-if="this.user.role == 'admin'"
-          :value="elem.id"
-          @click="delet($event)"
-        >
-          Delete
         </button>
       </div>
       </div>
@@ -211,12 +177,12 @@ export default {
     var use = JSON.parse(localStorage.getItem("user"));
     if (use) {
       this.user = use[0];
-      console.log(this.user);
+      // console.log(this.user);
     }
 
     axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
       this.events = result.data;
-      console.log(this.events);
+      // console.log(this.events);
     });
   },
   methods: {
@@ -252,17 +218,16 @@ export default {
     },
 
     // handle search
-    handleCulture(value) {
+    handleType(event,value) {
+      event.preventDefault()
       axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
-        this.events = result.data.map((event) => {
-          event.type === value;
+        this.events =  result.data.filter((event) => {
+         return event.type == value;
         });
-        // console.log(this.events);
+          console.log(this.events)
       });
     },
-    handleEntertainment() {},
-    handleSocial() {},
-    handleReligion() {},
+  
   },
   //  this data for testing the map
   data() {

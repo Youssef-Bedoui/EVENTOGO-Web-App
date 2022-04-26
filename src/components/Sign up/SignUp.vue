@@ -1,53 +1,58 @@
 <script>
-import axios from "axios"
+import axios from "axios";
+
 export default {
   data() {
     return {
-      name:"",
-      email:"",
-      password:""
-      
+      name: null,
+      email: null,
+      password: null,
     };
   },
-  mounted(){
-
-  },
-  methods:{
-     nameInput(event) {
-      this.name= event.target.value;
+  mounted() {},
+  methods: {
+    nameInput(event) {
+      this.name = event.target.value;
     },
-     emailInput(event) {
-      this.email= event.target.value;
+    emailInput(event) {
+      this.email = event.target.value;
     },
-     passwordInput(event) {
-      this.password= event.target.value;
+    passwordInput(event) {
+      this.password = event.target.value;
       console.log(this.password);
     },
-    post(){
-      var person={}
-        person["password"]=this.password
-        person["email"]=this.email
-        person["name"]=this.name
-        person["role"]="user"
-      
-      axios.post('http://localhost:3000/api/user/signup',
-      person
-      )
-      .then(result=>{
-        console.log(result.data);
-        if(result.data[0]==='yes'){location.href = 'signin'}
-        else {alert("user already exist")}
-      })
-    }
-  }
+
+    post() {
+      var person = {};
+      person["password"] = this.password;
+      person["email"] = this.email;
+      person["name"] = this.name;
+      person["role"] = "user";
+      if (person.password && person.email && person.name) {
+        axios
+          .post("http://localhost:3000/api/user/signup", person)
+          .then((result) => {
+            console.log(result.data);
+            if (result.data[0] === "yes") {
+              location.href = "signin";
+            } else {
+              alert("user already exist ");
+            }
+          });
+      } else {
+        {
+          alert("champ empty please fill it with your informations");
+        }
+      }
+    },
+  },
+
 };
 </script>
 
 
-
-
-
 <template>
+
     <div id="container">
     <div id="centeredDiv">
       <h2 id="title">Sign Up</h2>
@@ -72,9 +77,11 @@ export default {
                 <router-link :to="{name: 'signin'}" style="color: red">sign in?</router-link>
             </p>
       </div>
+
     </div>
   </div>
 </template>
+
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -106,6 +113,7 @@ export default {
   justify-content: center;
   align-items: center;
   margin: auto;
+
 }
 #element {
   padding: 5px;

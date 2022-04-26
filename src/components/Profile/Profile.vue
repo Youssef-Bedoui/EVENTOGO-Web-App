@@ -22,39 +22,28 @@
 </template>
 
 <script>
-//import axios from "axios";
+import axios from "axios";
 
 export default {
+
   name: "ProfileView",
   mounted: function () {
-    // this.email= localStorage.getItem("email");
-    // console.log("emailOfTheLoggedUser", this.email);
-    // axios
-    //   .get(`http://localhost:3000/api/user/connected/${this.email}`)
-    //   .then((result) => {
-    //     console.log(result.data);
-    //     this.name = result.data[0].name;
-    //     this.email = result.data[0].email;
-    //     this.role = result.data[0].role;
-    //    localStorage.setItem("logged", result.data[0].role);
-      
-    //    console.log("our local storage", localStorage.getItem("logged"))
-        
-    //   });
+    this.user=JSON.parse(localStorage.getItem("user"))
+     axios.get(`http://localhost:3000/api/event/selectAllById/${this.user.id}`).then((result) => {
+      console.log(result.data);  
+      this.events=result.data    
+    });
   },
   data() {
     return {
-
       user : JSON.parse(window.localStorage.getItem("userProfile")),
-      // id: "",
-      // name: "",
-      // email: "",
-      // role: "",
     };
   },
+
   methods: {
     getUser(){
       console.log("jaaabha", this.email);
+      //router.get("/selectAllById/:id", eventController.selectAllById);
     }
   },
 };

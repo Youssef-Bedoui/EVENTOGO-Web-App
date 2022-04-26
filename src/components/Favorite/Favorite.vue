@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <div id="centeredDiv">
-      <h2 id="title">Profile</h2>
+      <h2 id="title">My selection</h2>
 
 
       <div id="element">
@@ -31,7 +31,7 @@ export default {
     var use=JSON.parse(localStorage.getItem("user"))
     this.user=use[0]
      axios.get(`http://localhost:3000/api/event/selectAllById/${this.user.id}`).then((result) => {
-      console.log(result.data);  
+      console.log("server result" ,result.data);  
       this.events=result.data    
     });
   },

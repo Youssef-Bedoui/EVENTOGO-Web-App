@@ -1,4 +1,5 @@
 <template>
+  
   <nav v-if="logged && logged === 'admin'">
     <div class="logo">
       <img
@@ -47,6 +48,7 @@
     <div class="navright">
       <router-link to="/profile">Profile</router-link> |
       <router-link to="/" @click="logOut()">Logout</router-link>
+      
     </div>
   </nav>
   <!--  -->
@@ -83,42 +85,38 @@
 
 <script>
 
-import axios from "axios";
+// import axios from "axios";
+
 export default {
   data() {
     return {
       logged: null,
-      name: "",
-      email: "",
-      role: "",
+      name: null,
+      email: null,
+      role: null,
+      id:null,
+      user:null
     };
   },
+  
   mounted() {
-    if (localStorage.getItem("email")) {
-      this.email = localStorage.getItem("email");
-      axios
-        .get(`http://localhost:3000/api/user/connected/${this.email}`)
-        .then((result) => {
-          const profile = {
-            name: result.data[0].name,
-            email: result.data[0].email,
-            role: result.data[0].role,
-          };
-
-          const userProfile = JSON.stringify(profile);
-          localStorage.setItem("userProfile", userProfile);
-          localStorage.setItem("logged", result.data[0].role);
-          this.logged = localStorage.getItem("logged");
-        });
-    } else {
-      this.logged = null;
-    }
+    var use = JSON.parse(localStorage.getItem("user"));
+    console.log(use);
+    if (use) {      
+       this.user=use[0]
+       this.id=this.user.id
+       this.logged = this.user.role
+       console.log(this.logged);
+     
+    } 
   },
   methods: {
     logOut() {
-      if (localStorage.getItem("logged")) {
+      console.log('temchi');
+      if (this.logged) {
+        console.log(this.logged);
+        localStorage.removeItem("user")
         localStorage.removeItem("logged");
-        localStorage.removeItem("email");
         location.href = "/";
         console.log("our local storage", this.logged);
       }

@@ -48,11 +48,12 @@
     <div class="navright">
       <router-link to="/profile">Profile</router-link> |
       <router-link to="/" @click="logOut()">Logout</router-link>
+      
     </div>
   </nav>
   <!--  -->
   <!--  -->
-  <nav v-if='user==null'>
+  <nav v-else>
     <img
       id="logo"
       src="./img/278719454_518845159791717_4455080078741522629_n.png"
@@ -99,22 +100,23 @@ export default {
   },
   
   mounted() {
-    var use = localStorage.getItem("user");
+    var use = JSON.parse(localStorage.getItem("user"));
     console.log(use);
-    if (use) {
-    
-      console.log(use);
+    if (use) {      
        this.user=use[0]
        this.id=this.user.id
-          this.logged = this.user.role
+       this.logged = this.user.role
+       console.log(this.logged);
      
     } 
   },
   methods: {
     logOut() {
-      if (localStorage.getItem("logged")) {
+      console.log('temchi');
+      if (this.logged) {
+        console.log(this.logged);
+        localStorage.removeItem("user")
         localStorage.removeItem("logged");
-        localStorage.removeItem("email");
         location.href = "/";
         console.log("our local storage", this.logged);
       }

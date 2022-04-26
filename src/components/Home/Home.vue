@@ -118,52 +118,58 @@
         :key="i"
       >
         <img v-bind:src="elem.image" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-favorite" v-on:click="postFavorite">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-heart-fill"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-              />
-            </svg>
-          </h5>
-          <h5 class="card-title" id="title">{{ elem.title }}</h5>
-          <p class="card-text" id="category">{{ elem.type }}</p>
-          <p class="card-text" id="date">
-            {{ elem.date }}
-          </p>
-          <p class="card-text" id="description">
-            {{ elem.description }}
-          </p>
-          <button
-            href="#"
-            class="btn btn-primary"
-            v-if="this.user.role== 'admin'"
-            :value="elem.id"
-            @click="edit($event)"
+
+        <button
+          class="card-favorite"
+          v-if="this.user.id"
+          :value="elem.id"
+          @click="postFavorite($event)"
+        >
+          {{ elem.id }}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-heart-fill"
+            viewBox="0 0 16 16"
           >
-            Edit
-          </button>
-          <button
-            href="#"
-            class="btn btn-danger"
-            v-if="this.user.role== 'admin'"
-            :value="elem.id"
-            @click="delet($event)"
-          >
-            Delete
-          </button>
-        </div>
+            <path
+              fill-rule="evenodd"
+              d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+            />
+          </svg>
+        </button>
+        <h5 class="card-title" id="title">{{ elem.title }}</h5>
+        <p class="card-text" id="category">{{ elem.type }}</p>
+        <p class="card-text" id="date">
+          {{ elem.date }}
+        </p>
+        <p class="card-text" id="description">
+          {{ elem.description }}
+        </p>
+        <button
+          href="#"
+          class="btn btn-primary"
+          v-if="this.user.role == 'admin'"
+          :value="elem.id"
+          @click="edit($event)"
+        >
+          Edit
+        </button>
+        <button
+          href="#"
+          class="btn btn-danger"
+          v-if="this.user.role == 'admin'"
+          :value="elem.id"
+          @click="delet($event)"
+        >
+          Delete
+        </button>
       </div>
     </div>
   </div>
+
   <div id="footer">
     <h4>&copy; EVENTOGO TUNISIA , All rights Reserved 2022-2023</h4>
     <p>Thank you for visiting our website</p>
@@ -177,25 +183,29 @@ export default {
   name: "HomeView",
   props: {},
   mounted: function () {
-    
-    var use=JSON.parse(localStorage.getItem("user"))
-if(use){
-this.user=use[0]
-    console.log(this.user);
-
-      }
+    var use = JSON.parse(localStorage.getItem("user"));
+    if (use) {
+      this.user = use[0];
+      console.log(this.user);
+    }
     axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
       this.events = result.data;
       console.log(this.events);
     });
-    
   },
   methods: {
     myMethod(a) {
       console.log(a);
     },
-    postFavorite() {
-      console.log("slim");
+    postFavorite(event) {
+      console.log('slim');
+      console.log(event.target.value);
+      const fav={
+        id_event:event.target.value,
+        id_user:this.user.id
+      }
+      axios.post(`http://localhost:3000/api/favorite/addfav/`,fav)
+      .then(res=>console.log(res))
     },
     edit(event) {
       console.log(event.target.value);
@@ -214,6 +224,7 @@ this.user=use[0]
           location.href = "/";
         });
     },
+
     // handle search
     handleCulture(value) {
       axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
@@ -231,7 +242,7 @@ this.user=use[0]
   data() {
     return {
       events: null,
-      user: {}
+      user: {},
     };
   },
 };

@@ -112,11 +112,17 @@
     </nav>
     <!-- card -->
     <div id="container">
+
+
       <div class="card bg-dark text-white" v-for="(elem, i) in this.events"
         :key="i">
         <img v-bind:src="elem.image" class="card-img" alt="..." />
         <div class="card-img-overlay">
-          <h5 class="card-favorite" v-on:click="postFavorite" > <svg
+        
+          <h5 class="card-favorite" 
+          v-if="this.user.id"
+          :value="elem.id"
+          @click="postFavorite($event)" > <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
@@ -148,18 +154,50 @@
             v-if="this.user.role== 'admin'"
             :value="elem.id"
             @click="delet($event)"
-          >
-            Delete
-          </button>
-        </div>
-      </div>
 
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+            />
+          
+        </button>
+        <h5 class="card-title" id="title">{{ elem.title }}</h5>
+        <p class="card-text" id="category">{{ elem.type }}</p>
+        <p class="card-text" id="date">
+          {{ elem.date }}
+        </p>
+        <p class="card-text" id="description">
+          {{ elem.description }}
+        </p>
+        <button
+          href="#"
+          class="btn btn-primary"
+          v-if="this.user.role == 'admin'"
+          :value="elem.id"
+          @click="edit($event)"
+        >
+          Edit
+        </button>
+        <button
+          href="#"
+          class="btn btn-danger"
+          v-if="this.user.role == 'admin'"
+          :value="elem.id"
+          @click="delet($event)"
+        >
+          Delete
+        </button>
+      </div>
+      </div>
     </div>
   </div>
+
   <div id="footer">
     <h4>&copy; EVENTOGO TUNISIA , All rights Reserved 2022-2023</h4>
     <p>Thank you for visiting our website</p>
   </div>
+
 </template>
 
 <script>
@@ -169,12 +207,11 @@ export default {
   name: "HomeView",
   props: {},
   mounted: function () {
-    
-    var use=JSON.parse(localStorage.getItem("user"))
-
-    this.user=use[0]
-    console.log(this.user);
-
+    var use = JSON.parse(localStorage.getItem("user"));
+    if (use) {
+      this.user = use[0];
+      console.log(this.user);
+    }
     axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
       this.events = result.data;
       console.log(this.events);
@@ -184,8 +221,15 @@ export default {
     myMethod(a) {
       console.log(a);
     },
-    postFavorite() {
-      console.log("slim");
+    postFavorite(event) {
+      console.log('slim');
+      console.log(event.target.value);
+      const fav={
+        id_event:event.target.value,
+        id_user:this.user.id
+      }
+      axios.post(`http://localhost:3000/api/favorite/addfav/`,fav)
+      .then(res=>console.log(res))
     },
     edit(event) {
       console.log(event.target.value);
@@ -204,6 +248,7 @@ export default {
           location.href = "/";
         });
     },
+
     // handle search
     handleCulture(value) {
       axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
@@ -221,7 +266,7 @@ export default {
   data() {
     return {
       events: null,
-      user: {}
+      user: {},
     };
   },
 };

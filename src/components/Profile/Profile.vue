@@ -10,9 +10,9 @@
       <div id="element">
         <h2>Email : {{this.user.email}}</h2>
       </div>
-      <div id="element">
+      <!-- <div id="element">
         <h2>Role : {{this.user.role}}</h2>
-      </div>
+      </div> -->
       <!--  -->
       <!--  -->
  
@@ -28,7 +28,8 @@ export default {
 
   name: "ProfileView",
   mounted: function () {
-    this.user=JSON.parse(localStorage.getItem("user"))
+    var use=JSON.parse(localStorage.getItem("user"))
+    this.user=use[0]
      axios.get(`http://localhost:3000/api/event/selectAllById/${this.user.id}`).then((result) => {
       console.log(result.data);  
       this.events=result.data    
@@ -36,8 +37,7 @@ export default {
   },
   data() {
     return {
-      user :{},
-      events:[]
+      user : JSON.parse(window.localStorage.getItem("userProfile")),
     };
   },
 

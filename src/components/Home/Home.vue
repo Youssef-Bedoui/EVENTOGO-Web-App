@@ -79,32 +79,28 @@
         <p id="secondary-nav-text">SELECT BY TYPE :</p>
         <button
           class="btn btn-outline-secondary"
-          value="Cultural"
-          @click="handleCulture()"
+          @click="handleType($event,'Cultural')"
         >
           Cultural
         </button>
         <button
           class="btn btn-sm btn-outline-secondary"
           type="button"
-          value="Entertainment"
-          @click="handleEntertainment(this.value)"
+          @click="handleType($event,'Entertainment')"
         >
           Entertainment
         </button>
         <button
           class="btn btn-sm btn-outline-secondary"
           type="button"
-          value="Social"
-          @click="handlesocial(this.value)"
+          @click="handleType($event,'Social')"
         >
           Social
         </button>
         <button
           class="btn btn-sm btn-outline-secondary"
           type="button"
-          value="Religious"
-          @click="handleRelogion(this.value)"
+          @click="handleType($event,'Religious')"
         >
           Religious
         </button>
@@ -112,11 +108,16 @@
     </nav>
     <!-- card -->
     <div id="container">
+
+
       <div class="card bg-dark text-white" v-for="(elem, i) in this.events"
         :key="i">
         <img v-bind:src="elem.image" class="card-img" alt="..." />
         <div class="card-img-overlay">
-          <h5 class="card-favorite" v-on:click="postFavorite" > <svg
+          <h5 class="card-favorite" 
+          v-if="this.user.id"
+          :value="elem.id"
+          @click="postFavorite($event)" > <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
@@ -136,7 +137,7 @@
           <button
             href="#"
             class="btn btn-primary"
-            v-if="logged && logged == 'admin'"
+            v-if="this.user.role== 'admin'"
             :value="elem.id"
             @click="edit($event)"
           >
@@ -145,21 +146,24 @@
           <button
             href="#"
             class="btn btn-danger"
-            v-if="logged && logged == 'admin'"
+            v-if="this.user.role== 'admin'"
             :value="elem.id"
             @click="delet($event)"
+
           >
             Delete
-          </button>
-        </div>
+          
+        </button>
       </div>
-
+      </div>
     </div>
   </div>
+
   <div id="footer">
     <h4>&copy; EVENTOGO TUNISIA , All rights Reserved 2022-2023</h4>
     <p>Thank you for visiting our website</p>
   </div>
+
 </template>
 
 <script>
@@ -169,9 +173,15 @@ export default {
   name: "HomeView",
   props: {},
   mounted: function () {
+
+    var use = JSON.parse(localStorage.getItem("user"));
+    if (use) {
+      this.user = use[0];
+      // console.log(this.user);
+    }
+
     axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
       this.events = result.data;
-      this.logged = localStorage.getItem("logged");
       // console.log(this.events);
     });
   },
@@ -179,8 +189,15 @@ export default {
     myMethod(a) {
       console.log(a);
     },
-    postFavorite() {
-      console.log("slim");
+    postFavorite(event) {
+      console.log('slim');
+      console.log(event.target.value);
+      const fav={
+        id_event:event.target.value,
+        id_user:this.user.id
+      }
+      axios.post(`http://localhost:3000/api/favorite/addfav/`,fav)
+      .then(res=>console.log(res))
     },
     edit(event) {
       console.log(event.target.value);
@@ -199,24 +216,24 @@ export default {
           location.href = "/";
         });
     },
+
     // handle search
-    handleCulture(value) {
+    handleType(event,value) {
+      event.preventDefault()
       axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
-        this.events = result.data.map((event) => {
-          event.type === value;
+        this.events =  result.data.filter((event) => {
+         return event.type == value;
         });
-        // console.log(this.events);
+          console.log(this.events)
       });
     },
-    handleEntertainment() {},
-    handleSocial() {},
-    handleReligion() {},
+  
   },
   //  this data for testing the map
   data() {
     return {
       events: null,
-      logged: null,
+      user: {},
     };
   },
 };

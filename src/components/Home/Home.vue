@@ -74,8 +74,9 @@
       </a>
     </div>
     <!-- navbar search -->
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-dark">
       <form class="container-fluid justify-content-center">
+        <p id="secondary-nav-text">SELECT BY TYPE :</p>
         <button
           class="btn btn-outline-secondary"
           value="Cultural"
@@ -111,34 +112,55 @@
     </nav>
     <!-- card -->
     <div id="container">
-      <div
-        class="card"
-        style="width: 18rem"
-        v-for="(elem, i) in this.events"
-        :key="i"
-      >
-        <img v-bind:src="elem.image" class="card-img-top" alt="..." />
 
-        <button
-          class="card-favorite"
+
+      <div class="card bg-dark text-white" v-for="(elem, i) in this.events"
+        :key="i">
+        <img v-bind:src="elem.image" class="card-img" alt="..." />
+        <div class="card-img-overlay">
+        
+          <h5 class="card-favorite" 
           v-if="this.user.id"
           :value="elem.id"
-          @click="postFavorite($event)"
-        >
-          {{ elem.id }}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-heart-fill"
-            viewBox="0 0 16 16"
+          @click="postFavorite($event)" > <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-heart-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+              />
+            </svg></h5>
+          <h5 class="card-title" id="title">*{{ elem.title }}*</h5>
+          <p class="card-category" id="category"> {{ elem.type }}</p>
+          <p class="card-date" id="date">{{ elem.date }}</p>
+          <p class="card-description"> {{ elem.description }}</p>
+          <button
+            href="#"
+            class="btn btn-primary"
+            v-if="this.user.role== 'admin'"
+            :value="elem.id"
+            @click="edit($event)"
+          >
+            Edit
+          </button>
+          <button
+            href="#"
+            class="btn btn-danger"
+            v-if="this.user.role== 'admin'"
+            :value="elem.id"
+            @click="delet($event)"
+
           >
             <path
               fill-rule="evenodd"
               d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
             />
-          </svg>
+          
         </button>
         <h5 class="card-title" id="title">{{ elem.title }}</h5>
         <p class="card-text" id="category">{{ elem.type }}</p>
@@ -167,6 +189,7 @@
           Delete
         </button>
       </div>
+      </div>
     </div>
   </div>
 
@@ -174,6 +197,7 @@
     <h4>&copy; EVENTOGO TUNISIA , All rights Reserved 2022-2023</h4>
     <p>Thank you for visiting our website</p>
   </div>
+
 </template>
 
 <script>
@@ -252,7 +276,7 @@ export default {
 #home {
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: #dccaca;
+  background-color: #000000;
   height: auto;
   margin-top: 80px !important;
 }
@@ -272,10 +296,12 @@ nav {
 }
 
 #container {
-  width: 100%;
+  background-color: rgba(0, 0, 0, 0.158);
+  width: 50%;
+  margin: 10px auto;
   height: auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   flex-wrap: wrap;
 }
@@ -289,22 +315,29 @@ nav {
   border: 1px solid black;
   margin: 30px 0;
 }
+.card-img-overlay{
+  width:70% !important;
+  margin: 10px auto;
+  background-color: rgba(0, 0, 0, 0.58);
+  padding: 20px;
+  
+
+}
+.card bg-dark text-white{
+  width:50%;
+}
 .carousel-inner {
   height: 400px;
 }
 #title {
   text-transform: capitalize;
   text-align: center;
-  width: 100%;
-  background-color: #eb8190;
-  color: black;
-  padding: 5px 0;
+  font-size: 30px;
 }
 #date {
   text-decoration: underline;
   font-weight: bold;
   font-size: 15px;
-  color: rgb(13, 36, 127);
 }
 #description {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
@@ -314,25 +347,16 @@ nav {
   border-radius: 10px;
 }
 #category {
+  text-transform: uppercase;
+  text-decoration: underline;
   color: white;
   font-weight: bold;
-  background-color: red;
+  font-size: 25px;
   padding: 3px;
   width: auto;
-  animation: category 1s infinite;
+  margin: 0 auto;
   border-radius: 10px;
   text-align: center;
-}
-@keyframes category {
-  0% {
-    background-color: rgb(233, 64, 208);
-  }
-  50% {
-    background-color: rgb(61, 61, 225);
-  }
-  100% {
-    background-color: rgb(233, 64, 208);
-  }
 }
 div .card-body {
   height: 200px;
@@ -340,8 +364,9 @@ div .card-body {
   flex-direction: column;
   position: relative;
 }
-.card-img-top {
-  height: 20%;
+.card-img {
+  height: 400px;
+
 }
 .btn-primary {
   margin: 2px;
@@ -372,25 +397,39 @@ div .card-body {
   margin: 0 20px;
   font-size: 18px;
   font-weight: 500;
+  background-color: white;
+  color :rgb(0, 38, 255);
+  font-weight: bold;
+  transform: 1s ;
+}
+.btn-outline-secondary:hover{
+  background-color: rgb(78, 77, 77);
+  color:white
 }
 .card-favorite {
   text-align: center;
   cursor: pointer;
   color: red;
-  padding: 5px;
-  border: 2px solid;
   width: 30%;
   display: block;
   margin: 5px auto;
 }
+path{
+  font-size: 50px;
+}
 .card-favorite:hover {
-  background-color: red;
-  color: white;
+  color: rgb(83, 83, 83);
 }
-.card-img-top {
-  height: 35%;
-}
+
 button {
   cursor: pointer;
 }
+#secondary-nav-text{
+  font-size: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 </style>

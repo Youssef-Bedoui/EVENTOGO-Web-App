@@ -79,32 +79,28 @@
         <p id="secondary-nav-text">SELECT BY TYPE :</p>
         <button
           class="btn btn-outline-secondary"
-          value="Cultural"
-          @click="handleCulture()"
+          @click="handleType($event,'Cultural')"
         >
           Cultural
         </button>
         <button
           class="btn btn-sm btn-outline-secondary"
           type="button"
-          value="Entertainment"
-          @click="handleEntertainment(this.value)"
+          @click="handleType($event,'Entertainment')"
         >
           Entertainment
         </button>
         <button
           class="btn btn-sm btn-outline-secondary"
           type="button"
-          value="Social"
-          @click="handlesocial(this.value)"
+          @click="handleType($event,'Social')"
         >
           Social
         </button>
         <button
           class="btn btn-sm btn-outline-secondary"
           type="button"
-          value="Religious"
-          @click="handleRelogion(this.value)"
+          @click="handleType($event,'Religious')"
         >
           Religious
         </button>
@@ -118,14 +114,13 @@
         :key="i">
         <img v-bind:src="elem.image" class="card-img" alt="..." />
         <div class="card-img-overlay">
-        
           <h5 class="card-favorite" 
           v-if="this.user.id"
           :value="elem.id"
           @click="postFavorite($event)" > <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
+              width="50"
+              height="50"
               fill="currentColor"
               class="bi bi-heart-fill"
               viewBox="0 0 16 16"
@@ -156,37 +151,8 @@
             @click="delet($event)"
 
           >
-            <path
-              fill-rule="evenodd"
-              d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-            />
+            Delete
           
-        </button>
-        <h5 class="card-title" id="title">{{ elem.title }}</h5>
-        <p class="card-text" id="category">{{ elem.type }}</p>
-        <p class="card-text" id="date">
-          {{ elem.date }}
-        </p>
-        <p class="card-text" id="description">
-          {{ elem.description }}
-        </p>
-        <button
-          href="#"
-          class="btn btn-primary"
-          v-if="this.user.role == 'admin'"
-          :value="elem.id"
-          @click="edit($event)"
-        >
-          Edit
-        </button>
-        <button
-          href="#"
-          class="btn btn-danger"
-          v-if="this.user.role == 'admin'"
-          :value="elem.id"
-          @click="delet($event)"
-        >
-          Delete
         </button>
       </div>
       </div>
@@ -210,11 +176,11 @@ export default {
     var use = JSON.parse(localStorage.getItem("user"));
     if (use) {
       this.user = use[0];
-      console.log(this.user);
+      console.log("this-user", this.user);
     }
     axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
       this.events = result.data;
-      console.log(this.events);
+      // console.log(this.events);
     });
   },
   methods: {
@@ -229,7 +195,7 @@ export default {
         id_user:this.user.id
       }
       axios.post(`http://localhost:3000/api/favorite/addfav/`,fav)
-      .then(res=>console.log(res))
+      .then(res=>console.log("favorit-result",res))
     },
     edit(event) {
       console.log(event.target.value);
@@ -250,17 +216,16 @@ export default {
     },
 
     // handle search
-    handleCulture(value) {
+    handleType(event,value) {
+      event.preventDefault()
       axios.get("http://localhost:3000/api/event/selectAll").then((result) => {
-        this.events = result.data.map((event) => {
-          event.type === value;
+        this.events =  result.data.filter((event) => {
+         return event.type == value;
         });
-        // console.log(this.events);
+          console.log(this.events)
       });
     },
-    handleEntertainment() {},
-    handleSocial() {},
-    handleReligion() {},
+  
   },
   //  this data for testing the map
   data() {
@@ -406,6 +371,10 @@ div .card-body {
   background-color: rgb(78, 77, 77);
   color:white
 }
+.bi-heart-fill:hover{
+  background-color: rgb(78, 77, 77);
+  color:white
+}
 .card-favorite {
   text-align: center;
   cursor: pointer;
@@ -430,6 +399,16 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.bi{
+  /* border:4px solid #2c3e50; */
+  border-left:1px solid ;
+  border-bottom:1px solid   ;
+-webkit-box-shadow: 7px -5px 10px 0px #4B0082, 11px -9px 10px 0px #0000FF, 16px -14px 10px 0px #00FF00, 20px -17px 10px 0px #FFFF00, 24px -19px 10px 0px #FF7F00, 27px -23px 10px 0px #FF0000, 21px 7px 23px 0px rgba(10,4,1,0); 
+box-shadow: 7px -5px 10px 0px #4B0082, 11px -9px 10px 0px #0000FF, 16px -14px 10px 0px #00FF00, 20px -17px 10px 0px #FFFF00, 24px -19px 10px 0px #FF7F00, 27px -23px 10px 0px #FF0000, 21px 7px 23px 0px rgba(10,4,1,0);
+  padding: 15px;
+  border-radius: 10px;
+  background:#c4847a
 }
 
 </style>

@@ -50,7 +50,7 @@ export default {
   name: "AddEventView",
   data() {
     return {
-      title: "ggggggg",
+      title: "",
       description: "",
       type: "",
       image: null,

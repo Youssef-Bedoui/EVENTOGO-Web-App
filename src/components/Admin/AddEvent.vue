@@ -4,19 +4,14 @@
       <h2 id="title">Add new Event</h2>
       <div id="element">
         <label>Event Title :</label>
-        <input
-          type="text"
-          placeholder="Tap Event Title..."
-          @change="titleInput($event)"
-        />
+        <input type="text" placeholder="Tap Event Title..." @change="titleInput($event)" />
       </div>
       <div id="element">
-        <label>Event Description :</label>
-        <input
-          type="text"
-          placeholder="Tap Event Description..."
-          @change="descriptionInput($event)"
-        />
+        <fieldset>
+          <legend>Event Description:</legend>
+          <textarea rows="3" placeholder="Tap Event Description..." @change="descriptionInput($event)"
+            v-bind:defaultValue="this.description"></textarea>
+        </fieldset>
       </div>
       <div id="element">
         <label>Event Type :</label>
@@ -32,9 +27,11 @@
         <label>Event Date :</label>
         <input type="datetime-local" @change="inputDate($event)" />
       </div>
-      <div id="element">
+      <div id="element" class="d-flex flex-row justify-content-around align-items-center">
         <label>Event Image :</label>
-        <input type="text" @change="onUpload" />
+        <input class="w-50" type="file" accept="image/*" v-on:change="onUpload" />
+        <img v-if="image!==null" class="rounded-img" v-bind:src="image" alt="new image" />
+        <p v-else >{{ placeholder }}</p>
       </div>
       <div>
         <button id="addBtn" @click="handleSubmit()">Publish Your Event</button>
@@ -54,6 +51,7 @@ export default {
       description: "",
       type: "",
       image: null,
+      placeholder: "new image...",
       date: "",
     };
   },
@@ -68,10 +66,19 @@ export default {
       this.title = event.target.value;
     },
     inputDate(event) {
-      this.date = event.target.value;
+      const dateStr = event.target.value;
+      const date = new Date(dateStr);
+      const options = { dateStyle: 'medium', timeStyle: 'short' };
+      this.date = date.toLocaleString(undefined, options);
+
     },
-    onUpload(e) {
-      this.image = e.target.value;
+    async onUpload(event) {
+      const file = event.target.files[0];
+      const form = new FormData()
+      form.append("file", file);
+      form.append("upload_preset", "JozefBed");
+      await axios.post("http://api.cloudinary.com/v1_1/diyuy6jxe/upload", form)
+        .then(result => { this.image = result.data.secure_url })
     },
     handleSubmit() {
       axios
@@ -108,41 +115,63 @@ export default {
 * {
   box-sizing: border-box;
 }
+
 #title {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
+
 #container {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   padding: 10px;
-  margin-top: 80px;
-  background-image: url("https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700432285.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-image: linear-gradient(45deg, #5B49E1, #74c0ff, #5B49E1);
+
 }
+
 #centeredDiv {
   width: 40%;
-  padding: 25px 20px;
-  background-color: rgb(0, 104, 95);
+  padding: 15px 10px;
+  background-color: transparent;
   color: white;
-  border-radius: 50px 0 50px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: auto;
 }
+
 #element {
   padding: 5px;
   display: flex;
   flex-direction: column;
   text-align: left;
-  width: 80%;
+  width: 90%;
 }
+
+label,
+fieldset legend {
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+textarea {
+  width: 100%;
+  font-weight: bold;
+}
+
+input,select,
+fieldset textarea {
+  border: 2px solid #5B49E1;
+  border-radius: 10px !important;
+
+}
+
 label {
   margin-bottom: 5px;
 }
+
 input {
   width: 100%;
   padding: 8px;
@@ -151,35 +180,57 @@ input {
   font-weight: bold;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
 input:focus {
   background-color: #e7e7e7;
 }
+
 #types {
   padding: 10px;
   font-size: 18px;
   font-weight: bold;
 }
+
 select {
   border-radius: 5px;
 }
+
 select option {
   background-color: rgb(226, 223, 210);
 }
+
+.rounded-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
 #addBtn {
   margin-top: 20px;
-  background-color: rgb(81, 80, 80);
+  background-color: #4f38fd;
   color: white;
-  border: 3px solid #e7e7e7;
+  border: none;
   padding: 10px 20px;
   border-radius: 5px;
-  box-shadow: 0px 2px 5px white;
   transition: all 0.3s ease 0s;
   font-weight: bold;
   font-size: 20px;
+  transition: .3s ease;
+  cursor: pointer;
 }
+
 #addBtn:hover {
-  border: 3px solid #000000;
-  box-shadow: 0px 2px 5px white;
-  background-color: rgba(1, 149, 53, 0.984);
+  background-color: #3b21ff;
+}
+@media(max-width: 768px) {
+  #centeredDiv{
+    width: 100%;
+  }
+  #element{
+    width: 100%;
+  }
+  *:not(#title){
+    font-size: 10px !important;
+  }
 }
 </style>

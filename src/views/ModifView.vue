@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ModifEvent from "../components/ModifEvent/ModifEvent.vue";
+import ModifEvent from "../components/Admin/ModifEvent.vue";
 export default {
   name: "ModifView",
   components: {
@@ -18,5 +18,5 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style >
 </style>

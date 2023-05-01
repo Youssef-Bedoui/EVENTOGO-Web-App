@@ -6,7 +6,7 @@
 
 <script>
 
-import AddEvent from "../components/AddEvent/AddEvent.vue";
+import AddEvent from "../components/Admin/AddEvent.vue";
 
 export default {
   name: "AddEventView",

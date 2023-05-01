@@ -4,50 +4,37 @@
       <h2 id="title">Modif Event</h2>
       <div id="element">
         <label>Event Title :</label>
-        <input
-          type="text"
-          placeholder="Tap Event Title..."
-          @change="titleInput($event)"
-          v-bind:defaultValue="this.title"
-        />
-      </div>
-      <div id="element">
-        <label>Event Description :</label>
-        <input
-          type="text"
-          placeholder="Tap Event Description..."
-          @change="descriptionInput($event)"
-          v-bind:defaultValue="this.description"
-        />
-      </div>
-      <div id="element">
-        <label>Event Type :</label>
-        <select name="types" id="types" @change="switchSelect($event)">
-          <option hidden selected>{{this.type}}</option>
-          <option value="Cultural">Cultural</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Social">Social</option>
-          <option value="Religious">Religious</option>
-        </select>
-      </div>
-      <div id="element">
-        <label>Event Date :</label>
-        <input
-          type="datetime-local"
-          @change="inputDate($event)"
-          v-bind:defaultValue="this.date"
-        />
-      </div>
-      <div id="element">
-        <label>Event Image :</label>
-        <input
-          type="text"
-          @change="onUpload"
-          v-bind:defaultValue="this.image"
-        />
-      </div>
-      <div>
-        <button id="modifBtn" @click="handleSubmit()" >Submit Changes</button>
+              <input type="text" placeholder="Tap Event Title..." @change="titleInput($event)"
+                v-bind:defaultValue="this.title" />
+            </div>
+            <div id="element">
+              <fieldset>
+                <legend>Event Description:</legend>
+                <textarea rows="3" placeholder="Tap Event Description..." @change="descriptionInput($event)"
+                  v-bind:defaultValue="this.description"></textarea>
+              </fieldset>
+            </div>
+            <div id="element">
+              <label>Event Type :</label>
+              <select name="types" id="types" @change="switchSelect($event)">
+                <option hidden selected>{{ this.type }}</option>
+                <option value="Cultural">Cultural</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Social">Social</option>
+                <option value="Religious">Religious</option>
+              </select>
+            </div>
+            <div id="element">
+              <label>Event Date :</label>
+              <input type="datetime-local" @change="inputDate($event)" :defaultValue="this.date" />
+            </div>
+            <div id="element" class="d-flex flex-row justify-content-around align-items-center">
+              <label>Event Image :</label>
+              <input class="w-50" type="file" accept="image/*" v-on:change="onUpload" />
+              <img v-if="image !== null" class="rounded-img" v-bind:src="image" alt="new image" />
+              </div>
+            <div>
+              <button id="modifBtn" @click="handleSubmit()">Submit Changes</button>
       </div>
     </div>
   </div>
@@ -60,7 +47,6 @@ export default {
   name: "ModifView",
   mounted: function () {
     this.id = localStorage.getItem("id");
-    console.log("idofEvent", this.id);
     axios
       .get(`http://localhost:3000/api/event/selectOne/${this.id}`)
       .then((result) => {
@@ -78,7 +64,7 @@ export default {
       title: "",
       description: "",
       type: "",
-      image: "",
+      image: null,
       date: "",
     };
   },
@@ -97,10 +83,14 @@ export default {
     },
     inputDate(event) {
       this.date = event.target.value;
-      console.log(this.date);
     },
-    onUpload(e) {
-      this.image = e.target.value;
+    async onUpload(event) {
+      const file = event.target.files[0];
+      const form = new FormData()
+      form.append("file", file);
+      form.append("upload_preset", "JozefBed");
+      await axios.post("http://api.cloudinary.com/v1_1/diyuy6jxe/upload", form)
+        .then(result => { this.image = result.data.secure_url; this.image = result.data.secure_url });
     },
     handleSubmit() {
       axios
@@ -132,41 +122,59 @@ export default {
 * {
   box-sizing: border-box;
 }
+
 #title {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
+
 #container {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   padding: 10px;
-  margin-top: 80px;
-  background-image: url("https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700432285.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-image: linear-gradient(45deg, #5B49E1, #74c0ff, #5B49E1)
 }
+
 #centeredDiv {
   width: 40%;
-  padding: 25px 20px;
-  background-color: rgb(0, 104, 95);
+  padding: 15px 10px;
+  background-color: transparent;
   color: white;
-  border-radius: 50px 0 50px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: auto;
 }
+
 #element {
   padding: 5px;
   display: flex;
   flex-direction: column;
   text-align: left;
-  width: 80%;
+  width: 90%;
 }
-label {
+
+label,
+fieldset legend {
   margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: bold;
 }
+
+textarea {
+  width: 100%;
+  font-weight: bold;
+}
+
+input,
+select,
+fieldset textarea {
+  border: 2px solid #5B49E1;
+  border-radius: 10px !important;
+
+}
+
 input {
   width: 100%;
   padding: 8px;
@@ -175,35 +183,58 @@ input {
   font-weight: bold;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
 input:focus {
   background-color: #e7e7e7;
 }
+
+.rounded-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
 #types {
   padding: 10px;
   font-size: 18px;
   font-weight: bold;
 }
+
 select {
   border-radius: 5px;
 }
+
 select option {
   background-color: rgb(226, 223, 210);
 }
+
 #modifBtn {
   margin-top: 20px;
-  background-color: rgb(67, 83, 88);
+  background-color: #3b21ff;
+  border: none;
   color: white;
-  border: 3px solid #e7e7e7;
   padding: 10px 20px;
   border-radius: 5px;
-  box-shadow: 0px 2px 5px white;
   transition: all 0.3s ease 0s;
   font-weight: bold;
   font-size: 20px;
+  cursor: pointer;
 }
+
 #modifBtn:hover {
-  border: 3px solid #000000;
-  box-shadow: 0px 2px 5px white;
-  background-color: rgba(1, 149, 53, 0.984);
+  background-color: #4f38fd;
+}
+@media(max-width: 768px) {
+  #centeredDiv{
+    margin-top: 50px;
+    width: 100%;
+  }
+  #element{
+    width: 100%;
+  }
+  *:not(#title){
+    font-size: 10px !important;
+  }
 }
 </style>
